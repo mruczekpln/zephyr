@@ -1,9 +1,9 @@
-import { Button } from '@/components/ui/button'
+import MainContent from '@/components/ui/main-content'
 
 export default function Home() {
 	return (
-		<main className='flex min-h-screen flex-col items-center justify-between p-24'>
-			<Button>Hey, I'm here!</Button>
+		<main className='flex min-h-screen items-center justify-center gap-4'>
+			<MainContent></MainContent>
 		</main>
 	)
 }
