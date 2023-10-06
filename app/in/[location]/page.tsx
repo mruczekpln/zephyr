@@ -1,21 +1,34 @@
-import { DM_Serif_Display, Tienne } from 'next/font/google'
+import Details from '@/components/details'
+import MainInfo, { titleFont } from '@/components/main-info'
+import { Separator } from '@/components/ui/separator'
+import { ChevronDown } from 'lucide-react'
 
-const titleFont = DM_Serif_Display({ subsets: ['latin'], weight: '400' })
+import SevenDayForecast from '@/components/7day-forecast'
+import HourlyForecast from '@/components/hourly-forecast'
+import AirQualityIndex from '@/components/aqi'
+import MoonPhase from '@/components/moon-phase'
+import Minimap from '@/components/minimap'
 
 type Params = { params: { location: string } }
 export default function InLocation({ params }: Params) {
 	return (
-		<div className='grid place-items-center max-h-screen h-screen'>
-			<h1 className={`${titleFont.className} text-7xl text-center leading-none`}>
-				<span className='text-8xl'>TODAY IN &quot;WARSAW&quot;:</span>
-				<br />
-				<span className='text-9xl'>24 </span>
-				Celsius
-				<br />
-				LOW CHANCE OF SHOWERS AND a
-				<br />
-				GENTLE BREEZE FROM THE NORTHWEST.
-			</h1>
+		<div className='min-h-screen'>
+			<div className='flex flex-col gap-12 justify-center items-center min-h-screen h-auto'>
+				<MainInfo></MainInfo>
+				<Details></Details>
+				<ChevronDown size={48} className='absolute bottom-10'></ChevronDown>
+			</div>
+			<div className='min-h-screen overflow-x-hidden flex flex-col items-center w-screen py-10'>
+				<div
+					className={`h-[800px] grid grid-cols-[repeat(5,_250px)] grid-rows-[repeat(3,_250px)] gap-4 mt-8 [&>*]:p-4 leading-none ${titleFont.className}`}
+				>
+					<HourlyForecast></HourlyForecast>
+					<SevenDayForecast></SevenDayForecast>
+					<AirQualityIndex></AirQualityIndex>
+					<MoonPhase></MoonPhase>
+					<Minimap></Minimap>
+				</div>
+			</div>
 		</div>
 	)
 }

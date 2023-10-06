@@ -1,4 +1,4 @@
-import DayForecastCard from '@/components/ui/day-forecast-card'
+import DayForecastCard from '@/components/day-forecast-card'
 import { Separator } from '@/components/ui/separator'
 
 import { BiWind } from 'react-icons/bi'
