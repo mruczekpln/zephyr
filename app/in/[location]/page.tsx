@@ -1,5 +1,5 @@
 import Details from '@/components/details'
-import MainInfo, { titleFont } from '@/components/main-info'
+import MainInfo from '@/components/main-info'
 import { Separator } from '@/components/ui/separator'
 import { ChevronDown } from 'lucide-react'
 
@@ -20,12 +20,13 @@ export default function InLocation({ params }: Params) {
 			</div>
 			<div className='min-h-screen overflow-x-hidden flex flex-col items-center w-screen py-10'>
 				<div
-					className={`h-[800px] grid grid-cols-[repeat(5,_250px)] grid-rows-[repeat(3,_250px)] gap-4 mt-8 [&>*]:p-4 leading-none ${titleFont.className}`}
+					className={`h-[800px] grid grid-cols-[repeat(5,_250px)] grid-rows-[repeat(3,_250px)] gap-4 mt-8 leading-none `}
 				>
 					<HourlyForecast></HourlyForecast>
 					<SevenDayForecast></SevenDayForecast>
 					<AirQualityIndex></AirQualityIndex>
 					<MoonPhase></MoonPhase>
+					{/* @ts-expect-error Server Component */}
 					<Minimap></Minimap>
 				</div>
 			</div>

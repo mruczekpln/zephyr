@@ -1,9 +1,21 @@
-import { Card, CardTitle } from './ui/card'
+import Image from 'next/image'
+import { Card, CardContent, CardTitle } from './ui/card'
 
-export default function Minimap() {
+export default async function Minimap() {
 	return (
-		<Card className='row-span-2 row-start-2 col-start-5'>
-			<CardTitle>MAP</CardTitle>
+		<Card className='row-span-2 row-start-2 col-start-5 relative'>
+			<CardTitle className='font-title absolute text-xl z-10 rounded-tl-xl rounded-br-xl bg-white p-2 px-3 tracking-wide'>
+				MAP
+			</CardTitle>
+			<CardContent className='flex items-center h-full p-0 justify-center'>
+				<Image
+					className='rounded-xl w-full h-full'
+					src={`https://api.mapbox.com/styles/v1/mapbox/dark-v11/static/21.0173,52.2188,8/300x600?access_token=${process.env['MAPBOX_TOKEN']}`}
+					alt='minimap'
+					fill
+					quality={100}
+				/>
+			</CardContent>
 		</Card>
 	)
 }
