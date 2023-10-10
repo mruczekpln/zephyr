@@ -1,4 +1,6 @@
+import { CornerRightDown } from 'lucide-react'
 import { Card, CardContent, CardTitle } from './ui/card'
+import { Popover, PopoverContent, PopoverTrigger } from './ui/popover'
 
 type Message = {
 	range: number[]
@@ -27,7 +29,16 @@ export default function AirQualityIndex() {
 				AIR QUALITY INDEX
 			</CardTitle>
 			<CardContent className='flex flex-col items-start h-full px-3 gap-2'>
-				<h2 className='text-xl font-bold'>Good</h2>
+				<div className='flex gap-2 items-end'>
+					<h2 className='text-xl font-bold leading-none'>Good</h2>
+					<Popover>
+						<PopoverTrigger>
+							<u className='inline text-sm leading-tight underline-offset-2'>more info</u>
+							<CornerRightDown className='inline ml-2' size={12}></CornerRightDown>
+						</PopoverTrigger>
+						<PopoverContent>air info</PopoverContent>
+					</Popover>
+				</div>
 				<p className='text-sm'>
 					US EPA INDEX - <span className='font-extrabold'>3</span> <br />
 					UK DEFRA INDEX - <span className='font-extrabold'>7</span>
