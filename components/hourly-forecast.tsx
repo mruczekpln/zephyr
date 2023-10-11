@@ -14,7 +14,7 @@ export default function HourlyForecast({ hourlyData }: Props) {
 
 	return (
 		<Card className='col-span-full relative'>
-			<CardTitle className='font-title absolute text-xl pt-2 pl-3 pb-2 z-10 rounded-xl bg-white tracking-wide'>
+			<CardTitle className='font-title absolute text-xl pt-2 pl-3 pb-2 z-10 rounded-xl bg-background tracking-wide'>
 				HOURLY FORECAST
 			</CardTitle>
 			<CardContent className='flex items-center h-full p-0'>

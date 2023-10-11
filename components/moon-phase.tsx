@@ -6,7 +6,9 @@ type Props = { astro: Astronomy }
 export default function MoonPhase({ astro }: Props) {
 	return (
 		<Card className='col-start-4 relative  bg-transparent'>
-			<CardTitle className='font-title absolute text-xl top-2 left-3 tracking-wide leading-none'>MOON PHASE</CardTitle>
+			<CardTitle className='font-title absolute text-xl top-3 left-3 tracking-wide leading-none bg-background'>
+				MOON PHASE
+			</CardTitle>
 			<CardContent className='h-full flex flex-col items-start gap-6 justify-center p-3 bg-transparent'>
 				<div className='w-32 h-32 rounded-full bg-black absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 -z-10'></div>
 				<h2 className='font-bold mix-blend-difference text-white text-2xl'>{astro.moon_phase}</h2>

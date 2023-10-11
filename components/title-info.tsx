@@ -95,7 +95,10 @@ export default function TitleInfo({ location, data }: Props) {
 	return (
 		<div className='flex flex-col gap-12 justify-center items-center min-h-screen h-auto'>
 			<h1 className={`font-title text-7xl text-center leading-none`}>
-				<span className='text-8xl'>TODAY IN &quot;{location.replace('%20', ' ').toLocaleUpperCase()}&quot;:</span>
+				<span className='text-8xl'>
+					TODAY IN &quot;<u>{location.replace('%20', ' ').toLocaleUpperCase()}</u>&quot;
+				</span>
+				:
 				<br />
 				<span className='text-9xl'>{data.temp} </span>
 				Celsius

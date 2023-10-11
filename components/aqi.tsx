@@ -38,7 +38,7 @@ export default function AirQualityIndex({ aqi }: Props) {
 
 	return (
 		<Card className=''>
-			<CardTitle className='font-title text-xl z-10 rounded-tl-xl rounded-br-xl bg-white p-2 px-3 tracking-wide'>
+			<CardTitle className='font-title text-xl z-10 rounded-tl-xl rounded-xl p-2 px-3 tracking-wide bg-background'>
 				AIR QUALITY INDEX
 			</CardTitle>
 			<CardContent className='flex flex-col items-start h-full px-3 gap-2'>
@@ -77,7 +77,7 @@ export default function AirQualityIndex({ aqi }: Props) {
 					US EPA INDEX - <span className='font-extrabold'>{aqi['gb-defra-index']}</span> <br />
 					UK DEFRA INDEX - <span className='font-extrabold'>{aqi['us-epa-index']}</span>
 				</p>
-				<p>{currentRange.text}</p>
+				<p className='leading-tight'>{currentRange.text}</p>
 			</CardContent>
 		</Card>
 	)

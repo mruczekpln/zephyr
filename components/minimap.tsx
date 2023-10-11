@@ -5,7 +5,7 @@ type Props = { lat: string; lon: string }
 export default async function Minimap({ lat, lon }: Props) {
 	return (
 		<Card className='row-span-2 row-start-2 col-start-5 relative'>
-			<CardTitle className='font-title absolute text-xl z-10 rounded-tl-xl rounded-br-xl bg-white p-2 px-3 tracking-wide'>
+			<CardTitle className='font-title absolute text-xl z-10 rounded-tl-xl rounded-br-xl bg-background p-2 px-3 tracking-wide'>
 				MAP
 			</CardTitle>
 			<CardContent className='flex items-center h-full p-0 justify-center'>
