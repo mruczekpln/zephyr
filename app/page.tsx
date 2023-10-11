@@ -1,3 +1,5 @@
+import { CloudFog, CloudHail, CloudLightning, CloudRain, CloudSnow, CloudSun, Cloudy, Divide, Sun } from 'lucide-react'
+
 export default function Home() {
-	return null
+	return <div></div>
 }
