@@ -1,28 +1,6 @@
+import { getWindDirection } from '@/lib/utils/weather-data'
 import { ChevronDown } from 'lucide-react'
 import Details from './details'
-
-type CompassDirections = {
-	[key: string]: string
-}
-
-const compassDirections: CompassDirections = {
-	N: 'NORTH',
-	NNE: 'NORTH-NORTHEAST',
-	NE: 'NORTHEAST',
-	ENE: 'EAST-NORTHEAST',
-	E: 'EAST',
-	ESE: 'EAST-SOUTHEAST',
-	SE: 'SOUTHEAST',
-	SSE: 'SOUTH-SOUTHEAST',
-	S: 'SOUTH',
-	SSW: 'SOUTH-SOUTHWEST',
-	SW: 'SOUTHWEST',
-	WSW: 'WEST-SOUTHWEST',
-	W: 'WEST',
-	WNW: 'WEST-NORTHWEST',
-	NW: 'NORTHWEST',
-	NNW: 'NORTH-NORTHWEST'
-}
 
 type PercentageCategory = {
 	precip: {
@@ -87,7 +65,7 @@ type Props = {
 		chance_of_snow: number
 		wind: {
 			kph: number
-			direction: string
+			direction: number
 		}
 	}
 }
@@ -109,7 +87,7 @@ export default function TitleInfo({ location, data }: Props) {
 				AND a
 				<br />
 				<u className='decoration-dashed decoration-gray-500'>{getCategory(data.wind.kph, 'wind')}</u> FROM THE{' '}
-				{compassDirections[data.wind.direction]}.
+				{getWindDirection(data.wind.direction).toUpperCase()}.
 			</h1>
 			<Details
 				maxtemp={data.maxtemp}
