@@ -28,8 +28,17 @@ export default async function InLocation({ params }: Params) {
 	const current = data.currentConditions
 	const today = data.days[0]
 
+	const maxTemps = data.days.map(day => Math.round(day.tempmax)).join(',')
+	const minTemps = data.days.map(day => Math.round(day.tempmin)).join(',')
+
 	return (
-		<div className='min-h-screen'>
+		<div
+			className='min-h-screen bg-opacity-30 bg-no-repeat'
+			style={{
+				backgroundImage: `url(https://quickchart.io/chart/render/zm-08a22020-3937-410b-a00b-ca8ba00a20a4?${maxTemps}&data2=${minTemps}`,
+				backgroundPosition: 'center'
+			}}
+		>
 			<TitleInfo
 				location={params.location}
 				data={{
