@@ -20,7 +20,7 @@ type PercentageCategory = {
 const percentageCategories: PercentageCategory = {
 	precip: {
 		'NO RAIN RISK': { from: 0, to: 4 },
-		'MINIMAl RAIN RISK': { from: 10, to: 20 },
+		'MINIMAl RAIN RISK': { from: 5, to: 20 },
 		'LOW CHANCE OF SHOWERS': { from: 21, to: 40 },
 		'HIGH LIKELIHOOD OF RAINFALL': { from: 41, to: 60 },
 		'RAIN EXPECTED': { from: 61, to: Infinity }
@@ -35,24 +35,25 @@ const percentageCategories: PercentageCategory = {
 }
 
 function getCategory(percentage: number, type: 'precip' | 'wind') {
+	let categoryString
 	if (type === 'precip') {
 		for (const category in percentageCategories.precip) {
 			const { from, to } = percentageCategories.precip[category]
 
 			if (percentage >= from && percentage <= to) {
-				return category
+				categoryString = category
 			}
 		}
-		return null // Invalid percentage
 	} else if (type === 'wind') {
 		for (const category in percentageCategories.wind) {
 			const { from, to } = percentageCategories.wind[category]
 			if (percentage >= from && percentage <= to) {
-				return category
+				categoryString = category
 			}
 		}
-		return null // Invalid percentage
 	}
+
+	return categoryString || null // Invalid percentage
 }
 
 type Props = {
@@ -71,7 +72,7 @@ type Props = {
 }
 export default function TitleInfo({ location, data }: Props) {
 	return (
-		<div className='flex flex-col gap-12 justify-center items-center min-h-screen h-auto'>
+		<div className='flex flex-col gap-12 justify-center items-center h-screen'>
 			<h1 className={`font-title text-7xl text-center leading-none`}>
 				<span className='text-8xl'>
 					TODAY IN &quot;<u>{location.replace('%20', ' ').toLocaleUpperCase()}</u>&quot;

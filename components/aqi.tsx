@@ -5,18 +5,19 @@ import { useState } from 'react'
 import { Card, CardContent, CardTitle } from './ui/card'
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover'
 
-async function getAQIData(location: string) {
-	const res = await fetch(`https://api.waqi.info/feed/${location}/?token=${process.env['WAQI_API_KEY']}`, {
+async function getAQIData(lat: number, lon: number) {
+	const res = await fetch(`https://api.waqi.info/feed/geo:${lat};${lon}/?token=${process.env['WAQI_API_KEY']}`, {
 		next: { revalidate: 60 }
 	})
 	const data = await res.json()
+	console.log(data)
 
 	return data
 }
 
-type Props = { location: string }
-export default async function AirQualityIndex({ location }: Props) {
-	const { data }: AqiData = await getAQIData(location)
+type Props = { lat: number; lon: number }
+export default async function AirQualityIndex({ lat, lon }: Props) {
+	const { data }: AqiData = await getAQIData(lat, lon)
 	const currentMessage = getMessageByAqi(data.aqi)
 
 	return (
@@ -59,7 +60,8 @@ export default async function AirQualityIndex({ location }: Props) {
 				<p className='text-sm'>
 					INDEX - <span className='font-extrabold'>{data.aqi}</span> <br />
 					LATITUDE - <span className='font-extrabold'>{data.city.geo[0]}</span> <br />
-					LONGITUDE - <span className='font-extrabold'>{data.city.geo[1]}</span>
+					LONGITUDE - <span className='font-extrabold'>{data.city.geo[1]}</span> <br />
+					STATION - <span className='font-extrabold'>{data.city.name}</span>
 				</p>
 				<p className='leading-tight'>{currentMessage.text}</p>
 			</CardContent>

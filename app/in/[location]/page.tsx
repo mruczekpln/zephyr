@@ -35,16 +35,16 @@ export default async function InLocation({ params }: Params) {
 		<div
 			className='min-h-screen bg-opacity-30 bg-no-repeat'
 			style={{
-				backgroundImage: `url(https://quickchart.io/chart/render/zm-08a22020-3937-410b-a00b-ca8ba00a20a4?${maxTemps}&data2=${minTemps}`,
-				backgroundPosition: 'center'
+				backgroundImage: `url(https://quickchart.io/chart/render/zm-08a22020-3937-410b-a00b-ca8ba00a20a4?${maxTemps}&data2=${minTemps})`,
+				backgroundPosition: 'right 0px top -80px'
 			}}
 		>
 			<TitleInfo
 				location={params.location}
 				data={{
 					temp: current.temp,
-					chance_of_rain: (today.preciptype.includes('rain') && today.precipprob) || 0,
-					chance_of_snow: (today.snow && today.precipprob) || 0,
+					chance_of_rain: today.preciptype !== null && today.preciptype.includes('rain') ? today.precipprob : 0,
+					chance_of_snow: today.snow ? today.precipprob : 0,
 					maxtemp: today.tempmax,
 					mintemp: today.tempmin,
 					wind: { kph: current.windspeed, direction: current.winddir }
@@ -57,7 +57,7 @@ export default async function InLocation({ params }: Params) {
 					<HourlyForecast hourlyData={getHourlyData(data.days)}></HourlyForecast>
 					<SevenDayForecast dailyForecast={getDailyForecastWithoutHour(data.days)}></SevenDayForecast>
 					{/* @ts-expect-error Server Component */}
-					<AirQualityIndex location={params.location}></AirQualityIndex>
+					<AirQualityIndex lat={data.latitude} lon={data.longitude}></AirQualityIndex>
 					<Astronomy location={params.location}></Astronomy>
 					{/* @ts-expect-error Server Component */}
 					<Minimap lat={data.latitude} lon={data.longitude}></Minimap>
