@@ -36,7 +36,7 @@ function roundToNearest5(number: number) {
 function getWindDirection(degrees: number) {
 	const directions = ['North', 'Northeast', 'East', 'Southeast', 'South', 'Southwest', 'West', 'Northwest']
 
-	const index = Math.round((degrees % 360) / 45)
+	const index = Math.min(Math.round((degrees % 360) / 45), 7)
 	const direction = directions[index]
 
 	return direction

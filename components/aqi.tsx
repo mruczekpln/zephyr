@@ -10,7 +10,6 @@ async function getAQIData(lat: number, lon: number) {
 		next: { revalidate: 60 }
 	})
 	const data = await res.json()
-	console.log(data)
 
 	return data
 }

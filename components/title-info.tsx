@@ -71,6 +71,8 @@ type Props = {
 	}
 }
 export default function TitleInfo({ location, data }: Props) {
+	console.log(data)
+
 	return (
 		<div className='flex flex-col gap-12 justify-center items-center h-screen'>
 			<h1 className={`font-title text-7xl text-center leading-none`}>
