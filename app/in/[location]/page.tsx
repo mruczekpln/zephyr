@@ -7,7 +7,7 @@ import { env } from 'process'
 
 import { WeatherData } from '@/lib/types'
 import { getHourlyData, getDailyForecastWithoutHour } from '@/lib/utils/weather-data'
-import AirQualityIndex from '@/components/aqi'
+import AirQualityIndex from '@/components/air-quality'
 import { useState } from 'react'
 
 async function getWeatherData(location: string) {
