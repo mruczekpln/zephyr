@@ -9,12 +9,19 @@ import { WeatherData } from '@/lib/types'
 import { getHourlyData, getDailyForecastWithoutHour } from '@/lib/utils/weather-data'
 import AirQualityIndex from '@/components/air-quality'
 import { useState } from 'react'
+import { revalidatePath } from 'next/cache'
+import GoBack from '@/components/ui/go-back'
 
 async function getWeatherData(location: string) {
 	const response = await fetch(
 		`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}/next7days?unitGroup=metric&key=${env.WEATHER_API_KEY}&include=current,hours&lang=id&contentType=json`,
 		{ next: { revalidate: 60 } }
 	)
+
+	if (response.status === 400)
+		return {
+			ok: 'false'
+		}
 
 	const data = await response.json()
 
@@ -23,13 +30,23 @@ async function getWeatherData(location: string) {
 
 type Params = { params: { location: string } }
 export default async function InLocation({ params }: Params) {
-	const data: WeatherData = await getWeatherData(params.location)
+	const data = await getWeatherData(params.location)
 
-	const current = data.currentConditions
-	const today = data.days[0]
+	if (data['ok'] && !!data['ok'])
+		return (
+			<div className='h-screen flex items-center flex-col justify-center gap-16'>
+				<h1 className='text-6xl text-center font-title'>Bad location</h1>
+				<GoBack></GoBack>
+			</div>
+		)
 
-	const maxTemps = data.days.map(day => Math.round(day.tempmax)).join(',')
-	const minTemps = data.days.map(day => Math.round(day.tempmin)).join(',')
+	const weatherData: WeatherData = data
+
+	const current = weatherData.currentConditions
+	const today = weatherData.days[0]
+
+	const maxTemps = weatherData.days.map(day => Math.round(day.tempmax)).join(',')
+	const minTemps = weatherData.days.map(day => Math.round(day.tempmin)).join(',')
 
 	return (
 		<div
@@ -54,13 +71,13 @@ export default async function InLocation({ params }: Params) {
 				<div
 					className={`h-[800px] grid grid-cols-[repeat(5,_250px)] grid-rows-[repeat(3,_250px)] gap-4 mt-8 leading-none `}
 				>
-					<HourlyForecast hourlyData={getHourlyData(data.days)}></HourlyForecast>
-					<SevenDayForecast dailyForecast={getDailyForecastWithoutHour(data.days)}></SevenDayForecast>
+					<HourlyForecast hourlyData={getHourlyData(weatherData.days)}></HourlyForecast>
+					<SevenDayForecast dailyForecast={getDailyForecastWithoutHour(weatherData.days)}></SevenDayForecast>
 					{/* @ts-expect-error Server Component */}
-					<AirQualityIndex lat={data.latitude} lon={data.longitude}></AirQualityIndex>
+					<AirQualityIndex lat={weatherData.latitude} lon={weatherData.longitude}></AirQualityIndex>
 					<Astronomy location={params.location}></Astronomy>
 					{/* @ts-expect-error Server Component */}
-					<Minimap lat={data.latitude} lon={data.longitude}></Minimap>
+					<Minimap lat={weatherData.latitude} lon={weatherData.longitude}></Minimap>
 				</div>
 			</div>
 		</div>

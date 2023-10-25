@@ -4,18 +4,29 @@ import { useRouter } from 'next/navigation'
 import { Input } from './ui/input'
 import { Button } from './ui/button'
 
-export default function LocationForm() {
+type Props = { invalid?: string }
+export default function LocationForm({ invalid }: Props) {
 	const router = useRouter()
 
 	return (
 		<form
 			onSubmit={e => {
 				e.preventDefault()
-				router.push(`/in/${e.target['location'].value}`)
+				const {
+					location: { value }
+				} = e.target as typeof e.target & {
+					location: { value: string }
+				}
+				router.push(`/in/${value}`)
 			}}
 			className='w-full h-full flex gap-4'
 		>
-			<Input placeholder='city, location' name='location' className='h-full' required></Input>
+			<Input
+				placeholder={invalid === 'true' ? 'invalid location' : 'city, location'}
+				name='location'
+				className={`h-full ${invalid === 'true' && 'placeholder:font-bold'}`}
+				required
+			></Input>
 			<Button type='submit' className='grow h-full aspect-square'>
 				<ArrowDownRightSquare></ArrowDownRightSquare>
 			</Button>
