@@ -1,7 +1,7 @@
 import { ArrowDownFromLine, ArrowUpFromLine, CloudHail, CloudRain, CloudSnow, Wind } from 'lucide-react'
 
 type Props = { maxtemp: number; mintemp: number; wind_kph: number; chance_of_rain: number; chace_of_snow: number }
-export default function Details({ maxtemp, mintemp, wind_kph, chance_of_rain, chace_of_snow }: Props) {
+export default function TitleDetails({ maxtemp, mintemp, wind_kph, chance_of_rain, chace_of_snow }: Props) {
 	return (
 		<div className='flex w-[1200px] items-center'>
 			<div className='flex items-center gap-2 w-1/3'>

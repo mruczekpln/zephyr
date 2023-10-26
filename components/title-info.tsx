@@ -1,6 +1,6 @@
 import { getWindDirection } from '@/lib/utils/weather-data'
 import { ChevronDown } from 'lucide-react'
-import Details from './details'
+import TitleDetails from './title-details'
 
 type PercentageCategory = {
 	precip: {
@@ -90,13 +90,13 @@ export default function TitleInfo({ location, data }: Props) {
 				<u className='decoration-dashed decoration-gray-500'>{getCategory(data.wind.kph, 'wind')}</u> FROM THE{' '}
 				{getWindDirection(data.wind.direction).toUpperCase()}.
 			</h1>
-			<Details
+			<TitleDetails
 				maxtemp={data.maxtemp}
 				mintemp={data.mintemp}
 				wind_kph={data.wind.kph}
 				chance_of_rain={data.chance_of_rain}
 				chace_of_snow={data.chance_of_snow}
-			></Details>
+			></TitleDetails>
 			<ChevronDown size={48} className='absolute bottom-10'></ChevronDown>
 		</div>
 	)

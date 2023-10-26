@@ -1,53 +1,10 @@
-import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardTitle } from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
-import {
-	ArrowDownRightSquare,
-	Cloud,
-	CloudDrizzle,
-	CloudFog,
-	CloudHail,
-	CloudLightning,
-	CloudMoon,
-	CloudMoonRain,
-	CloudOff,
-	CloudRain,
-	CloudRainWind,
-	CloudSnow,
-	CloudSun,
-	CloudSunRain,
-	Cloudy,
-	Divide,
-	Droplet,
-	Droplets,
-	Flame,
-	Haze,
-	MoonStar,
-	MousePointerClick,
-	Rainbow,
-	Share,
-	Snowflake,
-	Sparkles,
-	Star,
-	Sun,
-	SunDim,
-	SunMedium,
-	Sunrise,
-	Sunset,
-	SunSnow,
-	Thermometer,
-	ThermometerSnowflake,
-	Tornado
-} from 'lucide-react'
 
 import gradient from '@/public/gradient.jpeg'
 import ScrollingText from '@/components/scrolling-text'
 import WeatherSnippet from '@/components/weather-snippet'
 import LocationForm from '@/components/location-form'
-import Link from 'next/link'
-import Image from 'next/image'
-import Aqicn from '@/public/aqicn.png'
-import Vclogo from '@/public/vclogo.svg'
+import ThanksTo from '@/components/thanks-to'
 
 export default function Home({ searchParams }: { searchParams?: { 'invalid-location': string | undefined } }) {
 	return (
@@ -85,41 +42,8 @@ export default function Home({ searchParams }: { searchParams?: { 'invalid-locat
 				<Card className='row-span-3 col-span-3 overflow-hidden'>
 					<ScrollingText></ScrollingText>
 				</Card>
-				{/* <h1 className='absolute left-24 text-8xl font-extrabold text-black'>What's the weather in... ?</h1> */}
 			</div>
-			<div className='flex justify-between items-center h-24 w-full px-16'>
-				<div className='flex h-24 items-center gap-16 [&>*]:text-xl'>
-					<p>
-						Thanks to: <MousePointerClick className='inline'></MousePointerClick>
-					</p>
-					<Link href='https://aqicn.org/contact/'>
-						<Image
-							className='grayscale duration-200 hover:grayscale-0'
-							src={Aqicn}
-							alt='waqipng'
-							objectFit='cover'
-							width={50}
-							height={50}
-						></Image>
-					</Link>
-					<Link href='https://www.visualcrossing.com/'>
-						<Image
-							className='grayscale duration-200 hover:grayscale-0'
-							src={Vclogo}
-							alt='waqipng'
-							objectFit='cover'
-							width={200}
-							height={50}
-						></Image>
-					</Link>
-				</div>
-				<div>
-					<p className='inline pr-4'>made by:</p>
-					<Link href='https://yummycoffee.github.io' target='_blank' className='underline text-xl'>
-						yummycoffee
-					</Link>
-				</div>
-			</div>
+			<ThanksTo></ThanksTo>
 		</>
 	)
 }
