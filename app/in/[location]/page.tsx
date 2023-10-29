@@ -1,9 +1,11 @@
 import { env } from 'process'
 
-import { WeatherData } from '@/lib/types'
+import { User, WeatherData } from '@/lib/types'
 import { redirect } from 'next/navigation'
 import TitleInfo from './title-info'
 import DetailsGrid from './details-grid'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 
 async function getWeatherData(location: string) {
 	const response = await fetch(
@@ -21,16 +23,37 @@ async function getWeatherData(location: string) {
 	return data
 }
 
+async function addLocation(id: string, location: { name: string; lat: number; lon: number }) {
+	await fetch('http://127.0.0.1:3000/api/users/add-search', {
+		method: 'POST',
+		body: JSON.stringify({ id, location }),
+		headers: {
+			'Content-Type': 'application/json'
+		}
+		// next: {
+		// 	revalidate: 60
+		// }
+	})
+}
+
 type Params = { params: { location: string } }
 export default async function InLocation({ params }: Params) {
 	const data = await getWeatherData(params.location)
-
 	if (data['ok'] && !!data['ok']) redirect('/?invalid-location=true')
 
 	const weatherData: WeatherData = data
 
 	const current = weatherData.currentConditions
 	const today = weatherData.days[0]
+
+	const session = (await getServerSession(authOptions)) as { user: User }
+	console.log(session)
+	if (session)
+		addLocation(session.user.id as string, {
+			name: weatherData.resolvedAddress,
+			lat: weatherData.latitude,
+			lon: weatherData.longitude
+		})
 
 	const maxTemps = weatherData.days.map(day => Math.round(day.tempmax)).join(',')
 	const minTemps = weatherData.days.map(day => Math.round(day.tempmin)).join(',')
@@ -45,6 +68,7 @@ export default async function InLocation({ params }: Params) {
 		>
 			<TitleInfo
 				location={params.location}
+				resolvedAdress={weatherData.resolvedAddress}
 				data={{
 					temp: current.temp,
 					chance_of_rain: today.preciptype !== null && today.preciptype.includes('rain') ? today.precipprob : 0,

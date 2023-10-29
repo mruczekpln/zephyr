@@ -1,3 +1,4 @@
+import { FieldValues } from 'react-hook-form'
 import bcrypt from 'bcrypt'
 import NextAuth, { AuthOptions, Profile, Session } from 'next-auth'
 // @ts-ignore
@@ -5,9 +6,10 @@ import { MongoDBAdapter } from '@auth/mongodb-adapter'
 import GithubProvider, { GithubProfile } from 'next-auth/providers/github'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import clientPromise from './adapters/mongodb'
-import { Credentials, User } from '@/lib/types'
+import { Credentials, SessionData, User } from '@/lib/types'
 import { ObjectId } from 'mongodb'
 import { JWT } from 'next-auth/jwt'
+import { string } from 'zod'
 
 export const authOptions: AuthOptions = {
 	secret: process.env.NEXTAUTH_SECRET,
@@ -27,24 +29,13 @@ export const authOptions: AuthOptions = {
 		},
 		// @ts-ignore
 		async session({ session, user, token }: { session: { user: User }; user: User; token: JWT }) {
-			if (user) {
-				session.user.image = user.image
-				session.user.searches = user.searches
-				session.user.settings = user.settings
-				session.user.createdAt = user.createdAt
-				session.user.emailVerified = user.emailVerified
-			} else {
-				const users = (await clientPromise).db('zephyr').collection<User>('users')
-				const user = await users.findOne({ _id: new ObjectId(token.sub) })
+			const res = await fetch(`http://127.0.0.1:3000/api/users/${token.sub}`)
+			const data = await res.json()
 
-				session.user.image = user?.image as string
-				session.user.searches = user?.searches as User['searches']
-				session.user.settings = user?.settings as User['settings']
-				session.user.createdAt = user?.createdAt as string
-				session.user.emailVerified = user?.emailVerified as boolean
-			}
+			const { name, image, searches, favLocation, settings, createdAt } = data.user
+			const sessionData = { id: token.sub, name, image, searches, favLocation, settings, createdAt }
 
-			return session
+			return { ...session, user: sessionData }
 		}
 	},
 	providers: [
@@ -55,17 +46,22 @@ export const authOptions: AuthOptions = {
 			profile(profile: GithubProfile) {
 				return {
 					id: profile.id,
+					githubProfileId: profile.id,
 					name: profile.name,
 					email: profile.email,
 					password: null,
 					image: profile.avatar_url,
 					searches: [],
+					favLocation: {
+						name: '',
+						count: 0
+					},
 					settings: {
 						unit: 'metric'
 					},
 					createdAt: new Date().toString(),
 					emailVerified: false
-				} as User
+				}
 			}
 		}),
 		CredentialsProvider({

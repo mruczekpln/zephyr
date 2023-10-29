@@ -1,14 +1,14 @@
 import { AqiData } from '@/lib/types'
 import { getMessageByAqi } from '@/lib/utils/aqi'
 import { CornerRightDown } from 'lucide-react'
-import { useState } from 'react'
 import { Card, CardContent, CardTitle } from '@/components/ui/card'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 
 async function getAQIData(lat: number, lon: number) {
 	const token = process.env.WAQI_API_KEY
 	try {
-		const res = await fetch(`https://api.waqi.info/feed/warsaw/?token=${token}`)
+		const res = await fetch(`https://api.waqi.info/feed/geo:${lat};${lon}/?token=${token}`)
+
 		const data = await res.json()
 
 		return data

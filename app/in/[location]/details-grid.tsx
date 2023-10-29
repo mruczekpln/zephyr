@@ -15,7 +15,6 @@ export default function DetailsGrid({ location, weatherData }: Props) {
 			>
 				<HourlyForecast hourlyData={getHourlyData(weatherData.days)}></HourlyForecast>
 				<SevenDayForecast dailyForecast={getDailyForecastWithoutHour(weatherData.days)}></SevenDayForecast>
-				{/* @ts-expect-error Server Component */}
 				<AirQuality lat={weatherData.latitude} lon={weatherData.longitude}></AirQuality>
 				<Astronomy location={location}></Astronomy>
 				{/* @ts-expect-error Server Component */}

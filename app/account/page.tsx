@@ -7,6 +7,7 @@ import { authOptions } from '../api/auth/[...nextauth]/route'
 
 export default async function Account() {
 	const session = await getServerSession(authOptions)
+	console.log(session)
 
 	await new Promise(res => setTimeout(() => res('res'), 1000))
 

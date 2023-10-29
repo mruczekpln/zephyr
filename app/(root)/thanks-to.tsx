@@ -13,10 +13,9 @@ export default function ThankTo() {
 				</p>
 				<Link href='https://aqicn.org/contact/'>
 					<Image
-						className='grayscale duration-200 hover:grayscale-0'
+						className='grayscale duration-200 hover:grayscale-0 object-cover'
 						src={Aqicn}
 						alt='waqipng'
-						objectFit='cover'
 						width={50}
 						height={50}
 					></Image>

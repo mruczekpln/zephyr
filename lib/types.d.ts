@@ -1,3 +1,4 @@
+import { Search } from 'lucide-react'
 import { HourlyWeather } from '@/lib/types'
 
 type HourlyWeather = {
@@ -210,22 +211,36 @@ type AstronomyDay = {
 	moonset: string
 }
 
-type User = {
+type UserSearches = {
 	name: string
+	date: string
+}[]
+
+type UserFavLocation = {
+	name: string
+	count: number
+}
+
+type UserSettings = {
+	unit: 'metric' | 'imperial'
+}
+
+type User = {
+	id?: string
+	githubProfileId?: number
 	email: string
 	password: string | null
-	image: string
-	searches: [
-		{
-			name: string
-			date: string
-		}?
-	]
-	settings: {
-		unit: 'metric' | 'imperial'
-	}
-	createdAt: string
 	emailVerified: boolean
+} & SessionData
+
+type SessionData = {
+	id: string
+	name: string
+	image: string
+	searches: UserSearches
+	favLocation: UserFavLocation
+	settings: UserSettings
+	createdAt: string
 }
 
 type Credentials = {
@@ -246,5 +261,8 @@ export {
 	MoonPhaseMessage,
 	AstronomyData,
 	User,
+	UserFavLocation,
+	UserSearches,
+	SessionData,
 	Credentials
 }

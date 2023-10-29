@@ -33,14 +33,12 @@ export default function Home({
 					className='row-span-6 col-span-4 flex items-center justify-center'
 					style={{ backgroundImage: `url(${gradient.src})` }}
 				></Card>
-				{/* @ts-expect-error Server Component */}
 				<WeatherSnippet></WeatherSnippet>
 				<Card className='row-span-6 col-span-3 col-start-8'>
-					<CardContent className='flex flex-col justify-center h-full gap-4'>
+					<CardContent className='flex flex-col h-full'>
 						<CardTitle className='font-title text-3xl pt-4'>WHAT&apos;S ZEPHYR ACTUALLY?</CardTitle>
-						<h2 className='font-extrabold text-5xl'>Your Weather Companion...</h2>
-						<h2 className='font-bold text-2xl'>Unlocking the Beauty of Weather.</h2>
-						<p className='text-right text-justify'>
+						<h2 className='font-bold text-4xl mt-4 mb-2'>Unlocking the Beauty of Weather.</h2>
+						<p className='text-sm'>
 							<u>Zephyr</u> is redefining what you can expect from a weather app. It&apos;s not just about forecasts;
 							it&apos;s about storytelling. Zephyr transforms weather data into immersive narratives. Explore the
 							symphony of the seasons, follow the drama of weather systems, and dive into the artistry of the

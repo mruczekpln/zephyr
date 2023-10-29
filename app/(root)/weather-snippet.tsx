@@ -15,7 +15,7 @@ export default async function WeatherSnippet() {
 	return (
 		<Card className='row-span-3 col-span-3'>
 			<CardContent className='h-full flex flex-col justify-between'>
-				<CardTitle className='font-title text-3xl py-4'>Current weather in: &dquot;Warsaw&dquot;</CardTitle>
+				<CardTitle className='font-title text-3xl py-4'>Current weather in: &quot;Warsaw&quot;</CardTitle>
 				<div className='flex items-center gap-2'>
 					<span className='text-5xl'>{current.temp}</span>
 					<ArrowDownFromLine />

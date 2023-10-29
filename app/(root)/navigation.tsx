@@ -9,10 +9,11 @@ import { useSession } from 'next-auth/react'
 import { Skeleton } from '@/components/ui/skeleton'
 import AccountDropdown from './account-dropdown'
 import AuthLink from './auth-link'
+import { SessionData } from '@/lib/types'
 
 export default function Navigation() {
-	const { data: session, status } = useSession()
-	console.log('nav', session)
+	const { data, status } = useSession()
+	const session: SessionData = data?.user
 
 	return (
 		<div
@@ -46,9 +47,9 @@ export default function Navigation() {
 					)}
 					{status === 'authenticated' && (
 						<>
-							<AccountDropdown userName={session!.user?.name as string}></AccountDropdown>
+							<AccountDropdown userName={session.name}></AccountDropdown>
 							<Avatar className='items-center'>
-								{(session.user?.image && <Image src={session.user?.image as string} alt='' fill></Image>) || (
+								{(session.image && <Image src={session.image} alt='' fill></Image>) || (
 									<UserCircle2 size={64}></UserCircle2>
 								)}
 							</Avatar>

@@ -48,7 +48,7 @@ export default function SignInForm({ githubProvider }: Props) {
 	const onSubmit: SubmitHandler<ValidationSchema> = async credentials => {
 		setLoading(true)
 
-		const response = await fetch('/api/auth/create-account', {
+		const response = await fetch('/api/users/create', {
 			method: 'POST',
 			body: JSON.stringify(credentials),
 			headers: { 'Content-Type': 'application/json' }

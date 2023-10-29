@@ -1,11 +1,9 @@
 'use client'
 
 import '@/styles/globals.css'
-import type { Metadata } from 'next'
 
 import { Inter } from 'next/font/google'
 import { DM_Serif_Display } from 'next/font/google'
-import { ThemeProvider } from '@/components/ui/theme-provider'
 import { SessionProvider } from 'next-auth/react'
 import Head from 'next/head'
 import Navigation from './(root)/navigation'

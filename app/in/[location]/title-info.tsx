@@ -1,6 +1,8 @@
 import { getWindDirection } from '@/lib/utils/weather-data'
 import { ChevronDown } from 'lucide-react'
 import TitleDetails from './title-details'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
+import { Card, CardContent, CardTitle } from '@/components/ui/card'
 
 type PercentageCategory = {
 	precip: {
@@ -57,6 +59,7 @@ function getCategory(percentage: number, type: 'precip' | 'wind') {
 }
 
 type Props = {
+	resolvedAdress: string
 	location: string
 	data: {
 		temp: number
@@ -70,15 +73,18 @@ type Props = {
 		}
 	}
 }
-export default function TitleInfo({ location, data }: Props) {
+export default function TitleInfo({ resolvedAdress, location, data }: Props) {
 	return (
 		<div className='flex flex-col gap-12 justify-center items-center h-screen'>
 			<h1 className={`font-title text-7xl text-center leading-none`}>
-				<span className='text-8xl'>
-					TODAY IN &quot;<u>{location.replace('%20', ' ').toLocaleUpperCase()}</u>&quot;
+				<span className='flex gap-8 justify-center'>
+					<span className='text-8xl'>TODAY IN:</span>
+					<Card className=''>
+						<CardContent className='flex items-center h-full py-0'>
+							<p className='text-3xl'>{resolvedAdress}</p>
+						</CardContent>
+					</Card>
 				</span>
-				:
-				<br />
 				<span className='text-9xl'>{data.temp} </span>
 				Celsius
 				<br />

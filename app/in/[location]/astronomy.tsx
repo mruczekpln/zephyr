@@ -2,31 +2,20 @@
 
 import { AstronomyData } from '@/lib/types'
 import { getMoonPhase } from '@/lib/utils/astronomy'
-import {
-	CornerDownLeft,
-	CornerRightUp,
-	Divide,
-	MoonStar,
-	MousePointerClick,
-	MoveDownRight,
-	MoveUpRight,
-	Sun
-} from 'lucide-react'
-import { env } from 'process'
+import { CornerDownLeft, CornerRightUp, MoonStar, MoveDownRight, MoveUpRight, Sun } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Card, CardContent, CardTitle } from '@/components/ui/card'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 
 async function getAstronomyData(location: string) {
-	const response = await fetch(`/api/aqi/${location}`)
+	const response = await fetch(`/api/astronomy/${location}`)
 	const data = await response.json()
 
 	return data
 }
 
 type Mode = 'sun' | 'moon'
-
 type Props = { location: string }
 export default function Astronomy({ location }: Props) {
 	const [data, setData] = useState<AstronomyData>({} as AstronomyData)
