@@ -4,7 +4,9 @@ import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { Ruler } from 'lucide-react'
 
-export default function Settings() {
+export default async function Settings() {
+	await new Promise(res => setTimeout(() => res('res'), 1000))
+
 	return (
 		<div className='flex flex-col w-1/2  h-full gap-8'>
 			<h1 className='text-6xl font-title w-max'>Settings</h1>

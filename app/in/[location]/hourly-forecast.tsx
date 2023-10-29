@@ -1,5 +1,5 @@
-import { Separator } from './ui/separator'
-import { Card, CardContent, CardTitle } from './ui/card'
+import { Separator } from '@/components/ui/separator'
+import { Card, CardContent, CardTitle } from '@/components/ui/card'
 import { CloudRain, CloudSun, Cloudy, Divide, icons, Sun } from 'lucide-react'
 import Conditions, { getConditionByID, getBiggerIcon } from '@/lib/conditions'
 import { HourlyWeather } from '@/lib/types'

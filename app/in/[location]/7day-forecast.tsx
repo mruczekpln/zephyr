@@ -1,5 +1,5 @@
-import { Table, TableBody, TableRow, TableCell, TableHeader, TableHead } from './ui/table'
-import { Card, CardContent, CardTitle } from './ui/card'
+import { Table, TableBody, TableRow, TableCell, TableHeader, TableHead } from '../../../components/ui/table'
+import { Card, CardContent, CardTitle } from '../../../components/ui/card'
 import { ArrowDownFromLine, ArrowUpFromLine, CloudRain, CloudSun, Cloudy, Sun, Wind } from 'lucide-react'
 import { DailyWeather } from '@/lib/types'
 import { getConditionByID } from '@/lib/conditions'

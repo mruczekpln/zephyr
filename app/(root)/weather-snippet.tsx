@@ -1,7 +1,7 @@
 import { WeatherData } from '@/lib/types'
 import { ArrowDownFromLine, ArrowUpFromLine, Cloud, Cloudy, Gauge } from 'lucide-react'
 import { env } from 'process'
-import { Card, CardContent, CardTitle } from './ui/card'
+import { Card, CardContent, CardTitle } from '@/components/ui/card'
 
 export default async function WeatherSnippet() {
 	const reponse = await fetch(
@@ -15,7 +15,7 @@ export default async function WeatherSnippet() {
 	return (
 		<Card className='row-span-3 col-span-3'>
 			<CardContent className='h-full flex flex-col justify-between'>
-				<CardTitle className='font-title text-3xl py-4'>Current weather in: "Warsaw"</CardTitle>
+				<CardTitle className='font-title text-3xl py-4'>Current weather in: &dquot;Warsaw&dquot;</CardTitle>
 				<div className='flex items-center gap-2'>
 					<span className='text-5xl'>{current.temp}</span>
 					<ArrowDownFromLine />

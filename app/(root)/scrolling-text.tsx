@@ -34,23 +34,23 @@ export default function ScrollingText() {
 			</ul>
 			<ul className='flex items-center justify-center md:justify-start delay-200 [&_li]:mx-8 [&>*]:w-max animate-reverse-infinite-scroll -translate-x-16 font-title tracking-wide text-8xl'>
 				<li>
-					A sunny day ahead with clear skies and a gentle breeze. Enjoy the pleasant weather and don't forget your
+					A sunny day ahead with clear skies and a gentle breeze. Enjoy the pleasant weather and don&apos;t forget your
 					sunscreen!
 				</li>
 				<li>
-					A sunny day ahead with clear skies and a gentle breeze. Enjoy the pleasant weather and don't forget your
+					A sunny day ahead with clear skies and a gentle breeze. Enjoy the pleasant weather and don&apos;t forget your
 					sunscreen!
 				</li>
 				<li>
-					A sunny day ahead with clear skies and a gentle breeze. Enjoy the pleasant weather and don't forget your
+					A sunny day ahead with clear skies and a gentle breeze. Enjoy the pleasant weather and don&apos;t forget your
 					sunscreen!
 				</li>
 				<li>
-					A sunny day ahead with clear skies and a gentle breeze. Enjoy the pleasant weather and don't forget your
+					A sunny day ahead with clear skies and a gentle breeze. Enjoy the pleasant weather and don&apos;t forget your
 					sunscreen!
 				</li>
 				<li>
-					A sunny day ahead with clear skies and a gentle breeze. Enjoy the pleasant weather and don't forget your
+					A sunny day ahead with clear skies and a gentle breeze. Enjoy the pleasant weather and don&apos;t forget your
 					sunscreen!
 				</li>
 			</ul>

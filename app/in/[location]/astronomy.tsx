@@ -14,10 +14,9 @@ import {
 } from 'lucide-react'
 import { env } from 'process'
 import { useEffect, useState } from 'react'
-import { Card, CardContent, CardTitle } from './ui/card'
-import { Popover, PopoverContent, PopoverTrigger } from './ui/popover'
-import { Switch } from './ui/switch'
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip'
+import { Card, CardContent, CardTitle } from '@/components/ui/card'
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 
 async function getAstronomyData(location: string) {
 	const response = await fetch(`/api/aqi/${location}`)

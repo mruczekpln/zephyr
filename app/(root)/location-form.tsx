@@ -1,8 +1,8 @@
 'use client'
 import { ArrowDownRightSquare } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import { Input } from './ui/input'
-import { Button } from './ui/button'
+import { Input } from '@/components/ui/input'
+import { Button } from '@/components/ui/button'
 
 type Props = { invalid?: string }
 export default function LocationForm({ invalid }: Props) {

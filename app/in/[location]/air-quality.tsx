@@ -2,8 +2,8 @@ import { AqiData } from '@/lib/types'
 import { getMessageByAqi } from '@/lib/utils/aqi'
 import { CornerRightDown } from 'lucide-react'
 import { useState } from 'react'
-import { Card, CardContent, CardTitle } from './ui/card'
-import { Popover, PopoverContent, PopoverTrigger } from './ui/popover'
+import { Card, CardContent, CardTitle } from '@/components/ui/card'
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 
 async function getAQIData(lat: number, lon: number) {
 	const token = process.env.WAQI_API_KEY
