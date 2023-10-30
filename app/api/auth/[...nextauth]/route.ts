@@ -7,9 +7,6 @@ import GithubProvider, { GithubProfile } from 'next-auth/providers/github'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import clientPromise from './adapters/mongodb'
 import { Credentials, SessionData, User } from '@/lib/types'
-import { ObjectId } from 'mongodb'
-import { JWT } from 'next-auth/jwt'
-import { string } from 'zod'
 
 export const authOptions: AuthOptions = {
 	secret: process.env.NEXTAUTH_SECRET,
@@ -24,18 +21,21 @@ export const authOptions: AuthOptions = {
 		strategy: 'jwt'
 	},
 	callbacks: {
-		jwt({ token }) {
-			return token
-		},
-		// @ts-ignore
-		async session({ session, user, token }: { session: { user: User }; user: User; token: JWT }) {
-			const res = await fetch(`http://127.0.0.1:3000/api/users/${token.sub}`)
+		async session({ session, user, token }: any) {
+			const res = await fetch(`http://127.0.0.1:3000/api/users/get`, {
+				method: 'POST',
+				body: JSON.stringify({
+					by: 'id',
+					id: token.sub
+				}),
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			})
+
 			const data = await res.json()
 
-			const { name, image, searches, favLocation, settings, createdAt } = data.user
-			const sessionData = { id: token.sub, name, image, searches, favLocation, settings, createdAt }
-
-			return { ...session, user: sessionData }
+			return { ...session, user: data }
 		}
 	},
 	providers: [
@@ -66,15 +66,25 @@ export const authOptions: AuthOptions = {
 		}),
 		CredentialsProvider({
 			credentials: {},
-			async authorize(credentials) {
-				const users = (await clientPromise).db('zephyr').collection<User>('users')
+			async authorize(credentials: any) {
+				const response = await fetch(`http://127.0.0.1:3000/api/users/get`, {
+					method: 'POST',
+					body: JSON.stringify({
+						by: 'email',
+						email: credentials.email
+					}),
+					headers: {
+						'Content-Type': 'application/json'
+					}
+				})
 
-				const user = await users.findOne({ email: (credentials as Credentials).email })
-				if (!user) throw new Error("Couldn't find an user with this email.")
+				const user = await response.json()
+				console.log('user in credentials', user)
+
 				const isPasswordValid = await bcrypt.compare((credentials as Credentials).password, user.password as string)
 				if (!isPasswordValid) throw new Error('Wrong password!')
 
-				return { id: user._id.toString(), ...user }
+				return { id: user._id.toString(), fetched: false, ...user }
 			}
 		})
 	]

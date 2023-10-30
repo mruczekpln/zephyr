@@ -23,8 +23,8 @@ async function getWeatherData(location: string) {
 	return data
 }
 
-async function addLocation(id: string, location: { name: string; lat: number; lon: number }) {
-	await fetch('http://127.0.0.1:3000/api/users/add-search', {
+async function addLocation(id: string, location: { name: string; query: string; lat: number; lon: number }) {
+	const response = await fetch('http://127.0.0.1:3000/api/users/add-search', {
 		method: 'POST',
 		body: JSON.stringify({ id, location }),
 		headers: {
@@ -34,6 +34,9 @@ async function addLocation(id: string, location: { name: string; lat: number; lo
 		// 	revalidate: 60
 		// }
 	})
+
+	const data = await response.json()
+	console.log(data)
 }
 
 type Params = { params: { location: string } }
@@ -49,8 +52,9 @@ export default async function InLocation({ params }: Params) {
 	const session = (await getServerSession(authOptions)) as { user: User }
 	console.log(session)
 	if (session)
-		addLocation(session.user.id as string, {
+		addLocation(session.user._id as string, {
 			name: weatherData.resolvedAddress,
+			query: decodeURI(params.location),
 			lat: weatherData.latitude,
 			lon: weatherData.longitude
 		})

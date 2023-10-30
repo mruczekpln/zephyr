@@ -15,8 +15,8 @@ export default function Home({
 }) {
 	if (searchParams && searchParams['revalidate']) {
 		console.log('revalidate')
-		revalidatePath('/', 'layout')
-		redirect('/')
+		// revalidatePath('/', 'layout')
+		// redirect('/')
 	}
 
 	return (

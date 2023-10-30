@@ -213,6 +213,7 @@ type AstronomyDay = {
 
 type UserSearches = {
 	name: string
+	query: string
 	date: string
 }[]
 
@@ -234,7 +235,7 @@ type User = {
 } & SessionData
 
 type SessionData = {
-	id: string
+	_id: string
 	name: string
 	image: string
 	searches: UserSearches
@@ -263,6 +264,7 @@ export {
 	User,
 	UserFavLocation,
 	UserSearches,
+	UserSettings,
 	SessionData,
 	Credentials
 }

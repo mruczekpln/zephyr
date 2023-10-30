@@ -4,8 +4,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { useParams, usePathname, useRouter } from 'next/navigation'
 import React, { Suspense, useEffect } from 'react'
 import HistoryLoading from './history/loading'
-import AccountLoading from './loading'
+import AccountLoading from './info/loading'
 import SettingsLoading from './settings/loading'
+import { useSession } from 'next-auth/react'
 
 export default function AccountLayout({ children }: { children: React.ReactNode }) {
 	const router = useRouter()
@@ -16,7 +17,7 @@ export default function AccountLayout({ children }: { children: React.ReactNode 
 		<div className='w-full min-h-screen flex flex-col items-center pt-20 gap-16'>
 			<Tabs defaultValue={childRoute} className='z-50'>
 				<TabsList className='grid grid-cols-3 z-50'>
-					<TabsTrigger value='account' onClick={() => router.push('/account')}>
+					<TabsTrigger value='info' onClick={() => router.push('/account/info')}>
 						Your Account
 					</TabsTrigger>
 					<TabsTrigger value='history' onClick={() => router.push('/account/history')}>
@@ -27,15 +28,8 @@ export default function AccountLayout({ children }: { children: React.ReactNode 
 					</TabsTrigger>
 				</TabsList>
 			</Tabs>
-			<Suspense
-				fallback={
-					(pathname === '/account' && <AccountLoading></AccountLoading>) ||
-					(pathname === '/account/history' && <HistoryLoading></HistoryLoading>) ||
-					(pathname === '/account/settings' && <SettingsLoading></SettingsLoading>)
-				}
-			>
-				{children}
-			</Suspense>
+
+			{children}
 		</div>
 	)
 }

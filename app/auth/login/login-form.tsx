@@ -48,10 +48,9 @@ export default function LogInForm() {
 			else form.setError('email', { type: 'custom', message: res?.error })
 			setLoading(false)
 		} else {
-			router.push('/?revalidate=true')
+			// router.push('/?revalidate=true')
 		}
 	}
-
 	return (
 		<Form {...form}>
 			<form onSubmit={form.handleSubmit(onSubmit)} className='w-full flex flex-col gap-2'>

@@ -11,7 +11,7 @@ import Link from 'next/link'
 import AuthLink from './auth-link'
 import { ReactNode } from 'react'
 
-export default function AccountDropdown({ userName }: { userName: string | ReactNode }) {
+export default function NavigationDropdown({ userName }: { userName: string | ReactNode }) {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger className='cursor-pointer outline-none'>{userName}</DropdownMenuTrigger>
@@ -19,7 +19,7 @@ export default function AccountDropdown({ userName }: { userName: string | React
 				<DropdownMenuLabel>My Account</DropdownMenuLabel>
 				<DropdownMenuSeparator />
 				<DropdownMenuItem>
-					<Link href='/account' className='w-full'>
+					<Link href='/account/info' className='w-full'>
 						<User className='inline mr-2' size={16}></User>
 						Profile
 					</Link>
