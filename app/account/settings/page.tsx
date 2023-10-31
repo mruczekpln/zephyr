@@ -4,12 +4,13 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter }
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/ui/select'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
-import { Ruler } from 'lucide-react'
+import { Ruler, Satellite } from 'lucide-react'
 import { getSession, useSession } from 'next-auth/react'
 import SettingsLoading from './loading'
-import { SessionData } from '@/lib/types'
+import { SessionData, User, UserSettings } from '@/lib/types'
 import { useEffect, useRef, useState } from 'react'
 import { Session } from 'next-auth'
+import { statSync } from 'fs'
 
 async function updateSetting(id: string, to: string) {
 	const res = await fetch('/api/users/update-settings', {
@@ -27,31 +28,56 @@ async function updateSetting(id: string, to: string) {
 
 	return null
 }
+const formStates: {
+	text: string
+	buttonDisabled: boolean
+	selectDisabled: boolean
+	variant: 'default' | 'ghost' | 'link' | 'destructive' | 'outline' | 'secondary' | null | undefined
+}[] = [
+	{
+		text: 'Save preferences.',
+		buttonDisabled: true,
+		selectDisabled: false,
+		variant: 'default'
+	},
+	{
+		text: 'Save preferences.',
+		buttonDisabled: false,
+		selectDisabled: false,
+		variant: 'default'
+	},
+	{
+		text: 'Updating...',
+		buttonDisabled: true,
+		selectDisabled: true,
+		variant: 'ghost'
+	},
+	{
+		text: 'Successfully saved your preferences!',
+		buttonDisabled: true,
+		selectDisabled: true,
+		variant: 'ghost'
+	}
+]
 
+type State = { formState: number; unit: UserSettings['unit'] }
 export default function Settings() {
-	// const { data, status } = useSession({ required: true })
-	// const user = data?.user as SessionData
-	// console.log(user)
-
 	const [sessionData, setSessionData] = useState({} as Session)
-	const user = sessionData && (sessionData.user as SessionData)
+	const user: User = sessionData.user as User
 
 	useEffect(() => {
 		getSession().then(res => setSessionData(res!))
 	}, [])
 
 	useEffect(() => {
-		if (sessionData.user) setUnit(sessionData.user.settings.unit)
+		if (user) setState(prev => ({ ...prev, unit: user.settings.unit }))
 	}, [sessionData])
 
-	const [unit, setUnit] = useState('')
-	const [buttonText, setButtonText] = useState<string>('Update preferences')
+	const [state, setState] = useState<State>({ formState: 0 } as State)
 
 	return (
 		<div className='flex flex-col w-1/2  h-full gap-8'>
 			<h1 className='text-6xl font-title w-max'>Settings</h1>
-			{/* {status === 'loading' && <SettingsLoading></SettingsLoading>} */}
-			{/* {status === 'authenticated' && ( */}
 			{user && (
 				<Card>
 					<CardHeader>
@@ -65,10 +91,14 @@ export default function Settings() {
 								<h3 className='font-medium'>Unit Set</h3>
 								<h3 className='text-sm text-muted-foreground'>Metric or imperial.</h3>
 							</div>
-							<Select onValueChange={data => setUnit(data as 'metric' | 'imperial')} defaultValue={user.settings.unit}>
+							<Select
+								onValueChange={(data: UserSettings['unit']) => setState(prev => ({ formState: 1, unit: data }))}
+								defaultValue={user.settings.unit}
+							>
 								<SelectTrigger
 									className='w-48 ml-auto'
-									disabled={buttonText === 'Successfully saved your preferences!'}
+									disabled={formStates[state.formState].selectDisabled}
+									//  'Successfully saved your preferences!'
 								>
 									<SelectValue
 										placeholder={user.settings.unit === 'metric' ? 'Metric, KM (C°, m/s)' : 'Imperial, MI (F°, mph)'}
@@ -84,21 +114,18 @@ export default function Settings() {
 					</CardContent>
 					<CardFooter>
 						<Button
-							variant={buttonText === 'Successfully saved your preferences!' ? 'ghost' : 'default'}
-							disabled={
-								buttonText !== 'Update preferences' || JSON.stringify(unit) === JSON.stringify(user.settings.unit)
-							}
+							variant={formStates[state.formState].variant}
+							disabled={formStates[state.formState].buttonDisabled}
 							onClick={async () => {
-								console.log(unit, user.settings.unit)
-								if (JSON.stringify(unit) !== JSON.stringify(user.settings.unit)) {
-									setButtonText('Updating')
-									await updateSetting(user._id, unit)
-									setButtonText('Successfully saved your preferences!')
+								if (JSON.stringify(state.unit) !== JSON.stringify(user.settings.unit)) {
+									setState(prev => ({ ...prev, formState: 2 }))
+									await updateSetting(user._id, state.unit)
+									setState(prev => ({ ...prev, formState: 3 }))
 								}
 							}}
 							className='w-full'
 						>
-							{buttonText}
+							{formStates[state.formState].text}
 						</Button>
 					</CardFooter>
 				</Card>

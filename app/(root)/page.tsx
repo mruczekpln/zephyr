@@ -1,24 +1,12 @@
 import { Card, CardContent, CardTitle } from '@/components/ui/card'
 
 import gradient from '@/public/gradient.jpeg'
-import ScrollingText from '@/app/(root)/scrolling-text'
-import ThanksTo from '@/app/(root)/thanks-to'
-import { revalidatePath } from 'next/cache'
-import { redirect } from 'next/navigation'
-import LocationForm from './location-form'
-import WeatherSnippet from './weather-snippet'
+import ScrollingText from './components/scrolling-text'
+import ThanksTo from './components/thanks-to'
+import LocationForm from './components/location-form'
+import WeatherSnippet from './components/weather-snippet'
 
-export default function Home({
-	searchParams
-}: {
-	searchParams?: { 'invalid-location': string | undefined; 'revalidate': string | undefined }
-}) {
-	if (searchParams && searchParams['revalidate']) {
-		console.log('revalidate')
-		// revalidatePath('/', 'layout')
-		// redirect('/')
-	}
-
+export default function Home({ searchParams }: { searchParams?: { 'invalid-location': string | undefined } }) {
 	return (
 		<div className='max-h-screen flex flex-col h-screen overflow-y-hidden'>
 			<div className='h-[calc(100vh-80px)] grid grid-cols-10 grid-rows-[repeat(10,minmax(0px,1fr))] gap-3 bg-gradient-to-t from-background to-foreground  [&>*]:backdrop-blur-md p-3 pb-0'>

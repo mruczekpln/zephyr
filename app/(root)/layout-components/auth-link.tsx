@@ -1,21 +1,9 @@
-// import { AuthAction } from 'next-auth'
-
-// interface Props extends React.ComponentProps<'button'> {
-// 	authAction: 'login' | 'signin' | 'signout'
-// }
-
-// const authActions: {
-// 	[key in AuthAction]: {}
-// } = {}
-
-// export default function AuthButton({ authAction }: Props) {}
-
 'use client'
 
 import { signOut } from 'next-auth/react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Button } from '../../components/ui/button'
+import { Button } from '@/components/ui/button'
 
 interface Props extends React.ComponentProps<'a'> {
 	type?: 'logout'

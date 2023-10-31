@@ -5,7 +5,7 @@ import {
 	DropdownMenuLabel,
 	DropdownMenuSeparator,
 	DropdownMenuItem
-} from '../../components/ui/dropdown-menu'
+} from '@/components/ui/dropdown-menu'
 import { User, Search, LogOut, Cog } from 'lucide-react'
 import Link from 'next/link'
 import AuthLink from './auth-link'

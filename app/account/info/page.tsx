@@ -23,7 +23,9 @@ export default function Account() {
 						<Avatar className='w-32 h-32 outline outline-offset-8 outline-black'>
 							{user.image ? <Image src={user.image || 'o'} alt='' fill></Image> : <UserCircle2 size={64}></UserCircle2>}
 						</Avatar>
-						<h1 className='text-6xl font-title w-max'>Hello, {user?.name}!</h1>
+						<h1 className='text-6xl font-title w-max'>
+							Hello, <u>{user?.name}</u>!
+						</h1>
 						<Card>
 							<CardContent className='flex gap-8 items-center p-6'>
 								<div className='flex flex-col items-center'>
@@ -32,7 +34,9 @@ export default function Account() {
 								</div>
 								<div className='flex flex-col items-center'>
 									<h1 className='text-3xl font-extrabold'>
-										{user.favLocation.name.length > 30 ? user.favLocation.name.split(',')[0] : user.favLocation.name}
+										{user.favLocation.name.length > 30
+											? user.favLocation.name.split(',')[0]
+											: user.favLocation.name || "You don't have"}
 									</h1>
 									<p>Favorite Location</p>
 								</div>

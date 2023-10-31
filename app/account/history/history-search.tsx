@@ -5,9 +5,9 @@ import { ExternalLink, Search as SearchIcon } from 'lucide-react'
 import Link from 'next/link'
 
 type Props = { searchData: UserSearches[0] }
-export default function Search({ searchData }: Props) {
+export default function HistorySearch({ searchData }: Props) {
 	return (
-		<Card>
+		<Card className='w-full'>
 			<CardHeader>
 				<CardTitle>
 					<SearchIcon className='inline'></SearchIcon> {searchData.query}

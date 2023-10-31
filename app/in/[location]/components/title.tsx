@@ -3,6 +3,7 @@ import { ChevronDown } from 'lucide-react'
 import TitleDetails from './title-details'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { Card, CardContent, CardTitle } from '@/components/ui/card'
+import { UserSettings } from '@/lib/types'
 
 type PercentageCategory = {
 	precip: {
@@ -61,6 +62,7 @@ function getCategory(percentage: number, type: 'precip' | 'wind') {
 type Props = {
 	resolvedAdress: string
 	location: string
+	unit: UserSettings['unit']
 	data: {
 		temp: number
 		maxtemp: number
@@ -73,7 +75,8 @@ type Props = {
 		}
 	}
 }
-export default function TitleInfo({ resolvedAdress, location, data }: Props) {
+
+export default function Title({ resolvedAdress, location, unit, data }: Props) {
 	return (
 		<div className='flex flex-col gap-12 justify-center items-center h-screen'>
 			<h1 className={`font-title text-7xl text-center leading-none`}>
@@ -86,7 +89,8 @@ export default function TitleInfo({ resolvedAdress, location, data }: Props) {
 					</Card>
 				</span>
 				<span className='text-9xl'>{data.temp} </span>
-				Celsius
+				{unit === 'imperial' ? 'Farenheit' : 'Celsius'}
+				{/* Celsius */}
 				<br />
 				<u className='decoration-dotted decoration-blue-400'>
 					{getCategory((data.chance_of_snow > 0 && data.chance_of_snow) || data.chance_of_rain, 'precip')}
@@ -99,6 +103,7 @@ export default function TitleInfo({ resolvedAdress, location, data }: Props) {
 			<TitleDetails
 				maxtemp={data.maxtemp}
 				mintemp={data.mintemp}
+				unit={unit}
 				wind_kph={data.wind.kph}
 				chance_of_rain={data.chance_of_rain}
 				chace_of_snow={data.chance_of_snow}

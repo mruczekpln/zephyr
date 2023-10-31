@@ -2,14 +2,14 @@ import { env } from 'process'
 
 import { User, WeatherData } from '@/lib/types'
 import { redirect } from 'next/navigation'
-import TitleInfo from './title-info'
-import DetailsGrid from './details-grid'
+import Title from './components/title'
+import DetailsGrid from './components/details-grid'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 
-async function getWeatherData(location: string) {
+async function getWeatherData(location: string, unitGroup: 'metric' | 'us') {
 	const response = await fetch(
-		`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}/next7days?unitGroup=metric&key=${env.WEATHER_API_KEY}&include=current,hours&lang=id&contentType=json`,
+		`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}/next7days?unitGroup=${unitGroup}&key=${env.WEATHER_API_KEY}&include=current,hours&lang=id&contentType=json`,
 		{ next: { revalidate: 60 } }
 	)
 
@@ -29,10 +29,10 @@ async function addLocation(id: string, location: { name: string; query: string; 
 		body: JSON.stringify({ id, location }),
 		headers: {
 			'Content-Type': 'application/json'
+		},
+		next: {
+			revalidate: 60
 		}
-		// next: {
-		// 	revalidate: 60
-		// }
 	})
 
 	const data = await response.json()
@@ -41,16 +41,15 @@ async function addLocation(id: string, location: { name: string; query: string; 
 
 type Params = { params: { location: string } }
 export default async function InLocation({ params }: Params) {
-	const data = await getWeatherData(params.location)
+	const session = (await getServerSession(authOptions)) as { user: User }
+	const unit = session ? (session.user.settings.unit === 'imperial' ? 'us' : 'metric') : 'metric'
+	const data = await getWeatherData(params.location, unit)
 	if (data['ok'] && !!data['ok']) redirect('/?invalid-location=true')
-
 	const weatherData: WeatherData = data
 
 	const current = weatherData.currentConditions
 	const today = weatherData.days[0]
 
-	const session = (await getServerSession(authOptions)) as { user: User }
-	console.log(session)
 	if (session)
 		addLocation(session.user._id as string, {
 			name: weatherData.resolvedAddress,
@@ -70,8 +69,9 @@ export default async function InLocation({ params }: Params) {
 				backgroundPosition: 'right 0px top -80px'
 			}}
 		>
-			<TitleInfo
+			<Title
 				location={params.location}
+				unit={session && session.user.settings.unit}
 				resolvedAdress={weatherData.resolvedAddress}
 				data={{
 					temp: current.temp,
@@ -81,8 +81,12 @@ export default async function InLocation({ params }: Params) {
 					mintemp: today.tempmin,
 					wind: { kph: current.windspeed, direction: current.winddir }
 				}}
-			></TitleInfo>
-			<DetailsGrid weatherData={weatherData} location={params.location}></DetailsGrid>
+			></Title>
+			<DetailsGrid
+				weatherData={weatherData}
+				unit={session && session.user.settings.unit}
+				location={params.location}
+			></DetailsGrid>
 		</div>
 	)
 }

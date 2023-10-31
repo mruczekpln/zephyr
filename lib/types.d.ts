@@ -1,7 +1,7 @@
 import { Search } from 'lucide-react'
-import { HourlyWeather } from '@/lib/types'
+import { HourlyWeather as HourData } from '@/lib/types'
 
-type HourlyWeather = {
+type HourlyData = {
 	datetime: string
 	datetimeEpoch: number
 	temp: number
@@ -29,7 +29,7 @@ type HourlyWeather = {
 	source: string
 }
 
-type DailyWeather = {
+type DailyData = {
 	datetime: string
 	datetimeEpoch: number
 	tempmax: number
@@ -66,11 +66,8 @@ type DailyWeather = {
 	icon: string
 	stations: string[]
 	source: string
+	hours: HourData[]
 }
-
-type HourlyDailyWeather = {
-	hours: HourlyWeather[]
-} & DailyWeather
 
 type CurrentConditions = {
 	datetime: string
@@ -253,9 +250,8 @@ type Credentials = {
 export {
 	WeatherData,
 	CurrentConditions,
-	DailyWeather,
-	HourlyWeather,
-	HourlyDailyWeather,
+	DailyData,
+	HourlyData,
 	Condition,
 	AqiData,
 	AQIMessage,

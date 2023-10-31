@@ -19,6 +19,7 @@ export default function Navigation() {
 		<div
 			className={`flex items-center h-auto top-16 w-screen max-w-screen overflow-x-hidden px-20 mx-auto z-10 absolute`}
 		>
+			{/* <div>{JSON.stringify(data)}</div> */}
 			<Link
 				href={'/'}
 				className='text-xl flex gap-2 items-center hover:bg-primary/20 px-4 rounded-xl transition-colors duration-200'

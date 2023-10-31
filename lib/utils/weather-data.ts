@@ -1,12 +1,12 @@
-import { HourlyDailyWeather, HourlyWeather, DailyWeather } from '../types'
+import { DailyData, HourlyData } from '../types'
 
-function getHourlyData(data: HourlyDailyWeather[]) {
-	const allHourForecasts: HourlyWeather[] = []
+function getHourlyData(data: DailyData[]) {
+	const allHourForecasts: HourlyData[] = []
 	data.forEach(day => day.hours.forEach(hour => allHourForecasts.push(hour)))
 
 	const localDate = new Date()
 
-	const closest24Hours: HourlyWeather[] = []
+	const closest24Hours: HourlyData[] = []
 	for (let i = 0, j = 0; i < allHourForecasts.length; i++) {
 		if (j === 24) break
 
@@ -25,10 +25,6 @@ function getHourlyData(data: HourlyDailyWeather[]) {
 	return closest24Hours2HourInterval
 }
 
-function getDailyForecastWithoutHour(days: HourlyDailyWeather[]): DailyWeather[] {
-	return days.map(({ hours, ...rest }) => rest).slice(-7)
-}
-
 function roundToNearest5(number: number) {
 	return Math.round(number / 5) * 5
 }
@@ -42,4 +38,4 @@ function getWindDirection(degrees: number) {
 	return direction
 }
 
-export { getHourlyData, getDailyForecastWithoutHour, roundToNearest5, getWindDirection }
+export { getHourlyData, roundToNearest5, getWindDirection }

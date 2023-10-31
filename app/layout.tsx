@@ -6,7 +6,7 @@ import { Inter } from 'next/font/google'
 import { DM_Serif_Display } from 'next/font/google'
 import { SessionProvider } from 'next-auth/react'
 import Head from 'next/head'
-import Navigation from './(root)/navigation'
+import Navigation from './(root)/layout-components/navigation'
 
 const inter = Inter({
 	subsets: ['latin'],

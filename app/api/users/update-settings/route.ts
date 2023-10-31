@@ -5,7 +5,7 @@ import { ObjectId } from 'mongodb'
 
 type RequestBody = { id: string; unit: UserSettings }
 export async function POST(req: Request) {
-	const body = await req.json()
+	const body: RequestBody = await req.json()
 	console.log(body)
 
 	const users = (await clientPromise).db('zephyr').collection('users')

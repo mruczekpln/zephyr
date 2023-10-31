@@ -5,7 +5,7 @@ import { Session, getServerSession } from 'next-auth'
 import { getSession, useSession } from 'next-auth/react'
 import HistoryLoading from './loading'
 import { SessionData } from '@/lib/types'
-import Search from './search'
+import HistorySearch from './history-search'
 import { useEffect, useState } from 'react'
 
 export default function History() {
@@ -21,11 +21,15 @@ export default function History() {
 			{/* {status === 'loading' && <HistoryLoading></HistoryLoading>} */}
 			{user && (
 				<>
-					<h1 className='font-title text-5xl leading-relaxed'>History of your searches, {user?.name}</h1>
-					<div className='grid grid-cols-1 w-[600px] gap-8'>
-						{user.searches.map((search, index) => (
-							<Search searchData={search} key={index}></Search>
-						))}
+					<h1 className='font-title text-5xl leading-relaxed'>
+						History of your searches, <u>{user?.name}</u>.
+					</h1>
+					<div className='grid grid-cols-1 w-[600px] gap-8 place-items-center'>
+						{user.searches.length > 0 ? (
+							user.searches.map((search, index) => <HistorySearch searchData={search} key={index}></HistorySearch>)
+						) : (
+							<h2 className='text-4xl text-muted-foreground font-bold'>I guess you&apos;ve gotta fill this up!</h2>
+						)}
 					</div>
 				</>
 			)}

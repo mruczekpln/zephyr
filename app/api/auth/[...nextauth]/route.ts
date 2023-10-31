@@ -78,13 +78,15 @@ export const authOptions: AuthOptions = {
 					}
 				})
 
+				if (response.status === 401) throw new Error("Couldn't find an account with this email.")
+
 				const user = await response.json()
 				console.log('user in credentials', user)
 
 				const isPasswordValid = await bcrypt.compare((credentials as Credentials).password, user.password as string)
 				if (!isPasswordValid) throw new Error('Wrong password!')
 
-				return { id: user._id.toString(), fetched: false, ...user }
+				return { id: user._id.toString(), ...user }
 			}
 		})
 	]
