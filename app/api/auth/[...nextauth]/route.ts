@@ -22,7 +22,7 @@ export const authOptions: AuthOptions = {
 	},
 	callbacks: {
 		async session({ session, user, token }: any) {
-			const res = await fetch(`http://127.0.0.1:3000/api/users/get`, {
+			const res = await fetch(`/api/users/get`, {
 				method: 'POST',
 				body: JSON.stringify({
 					by: 'id',
