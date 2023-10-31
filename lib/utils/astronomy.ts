@@ -1,6 +1,6 @@
-import { MoonPhase } from '../types'
+import { MoonPhaseMessage } from '../types'
 
-const moonPhases: MoonPhase[] = [
+const moonPhases: MoonPhaseMessage[] = [
 	{
 		from: 0.0,
 		to: 0.002,

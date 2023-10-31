@@ -53,8 +53,8 @@ export async function POST(req: Request) {
 		console.log(result)
 
 		return NextResponse.json(result)
-	} catch (error) {
+	} catch (error: any) {
 		console.log('error', error)
-		return NextResponse.json(error.body)
+		return NextResponse.json(error)
 	}
 }
