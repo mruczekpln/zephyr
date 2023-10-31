@@ -13,7 +13,7 @@ export async function POST(request: Request) {
 	else {
 		const hashedPassword = await bcrypt.hash(credentials.password, 10)
 
-		await users.insertOne({
+		const result = await users.insertOne({
 			name: credentials.name as string,
 			email: credentials.email as string,
 			password: hashedPassword as string,
@@ -29,7 +29,7 @@ export async function POST(request: Request) {
 			createdAt: new Date().toString(),
 			emailVerified: false
 		})
-	}
 
-	return NextResponse.json({ redirect: true })
+		return NextResponse.json(result)
+	}
 }
