@@ -67,20 +67,25 @@ export const authOptions: AuthOptions = {
 		CredentialsProvider({
 			credentials: {},
 			async authorize(credentials: any) {
-				const response = await fetch(`${process.env.NEXTAUTH_URL}/api/users/get`, {
-					method: 'POST',
-					body: JSON.stringify({
-						by: 'email',
-						email: credentials.email
-					}),
-					headers: {
-						'Content-Type': 'application/json'
-					}
-				})
+				// const response = await fetch(`${process.env.NEXTAUTH_URL}/api/users/get`, {
+				// 	method: 'POST',
+				// 	body: JSON.stringify({
+				// 		by: 'email',
+				// 		email: credentials.email
+				// 	}),
+				// 	headers: {
+				// 		'Content-Type': 'application/json'
+				// 	}
+				// })
 
-				if (response.status === 401) throw new Error("Couldn't find an account with this email.")
+				// if (response.status === 401) throw new Error("Couldn't find an account with this email.")
 
-				const user = await response.json()
+				// const user = await response.json()
+
+				const users = (await clientPromise).db('zephyr').collection('users')
+				const user = await users.findOne({ email: credentials.email })
+				if (!user) throw new Error("Couldn't find an user with this id.")
+
 				console.log('user in credentials', user)
 
 				const isPasswordValid = await bcrypt.compare((credentials as Credentials).password, user.password as string)
