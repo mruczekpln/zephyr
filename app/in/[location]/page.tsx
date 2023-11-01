@@ -24,7 +24,7 @@ async function getWeatherData(location: string, unitGroup: 'metric' | 'us') {
 }
 
 async function addLocation(id: string, location: { name: string; query: string; lat: number; lon: number }) {
-	const response = await fetch('/api/users/add-search', {
+	const response = await fetch(`${process.env.NEXTAUTH_URL}/api/users/add-search`, {
 		method: 'POST',
 		body: JSON.stringify({ id, location }),
 		headers: {
