@@ -7,6 +7,7 @@ import GithubProvider, { GithubProfile } from 'next-auth/providers/github'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import clientPromise from './adapters/mongodb'
 import { Credentials, SessionData, User } from '@/lib/types'
+import { ObjectId } from 'mongodb'
 
 export const authOptions: AuthOptions = {
 	secret: process.env.NEXTAUTH_SECRET,
@@ -22,20 +23,23 @@ export const authOptions: AuthOptions = {
 	},
 	callbacks: {
 		async session({ session, user, token }: any) {
-			const res = await fetch(`/api/users/get`, {
-				method: 'POST',
-				body: JSON.stringify({
-					by: 'id',
-					id: token.sub
-				}),
-				headers: {
-					'Content-Type': 'application/json'
-				}
-			})
+			// const res = await fetch(`/api/users/get`, {
+			// 	method: 'POST',
+			// 	body: JSON.stringify({
+			// 		by: 'id',
+			// 		id: token.sub
+			// 	}),
+			// 	headers: {
+			// 		'Content-Type': 'application/json'
+			// 	}
+			// })
 
-			const data = await res.json()
+			// const data = await res.json()
+			const users = (await clientPromise).db('zephyr').collection('users')
+			const userData = await users.findOne({ _id: new ObjectId(token.sub) })
+			if (!user) throw new Error("Couldn't find an user with this id.")
 
-			return { ...session, user: data }
+			return { ...session, user: userData }
 		}
 	},
 	providers: [
@@ -83,7 +87,7 @@ export const authOptions: AuthOptions = {
 				// const user = await response.json()
 
 				const users = (await clientPromise).db('zephyr').collection('users')
-				const user = await users.findOne({ email: credentials.email })
+				const user = await users.findOne({ email: credentials.email }, { projection: { password: 1 } })
 				if (!user) throw new Error("Couldn't find an user with this id.")
 
 				console.log('user in credentials', user)
