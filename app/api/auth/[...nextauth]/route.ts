@@ -67,7 +67,7 @@ export const authOptions: AuthOptions = {
 		CredentialsProvider({
 			credentials: {},
 			async authorize(credentials: any) {
-				const response = await fetch(`/api/users/get`, {
+				const response = await fetch(`${process.env.NEXTAUTH_URL}/api/users/get`, {
 					method: 'POST',
 					body: JSON.stringify({
 						by: 'email',
