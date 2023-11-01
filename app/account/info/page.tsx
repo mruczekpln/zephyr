@@ -8,7 +8,7 @@ import { Card, CardContent } from '@/components/ui/card'
 import { authOptions } from '../../api/auth/[...nextauth]/route'
 import { getSession, useSession } from 'next-auth/react'
 import AccountLoading from './loading'
-import { SessionData } from '@/lib/types'
+import { SessionData } from '@/types/index'
 
 export default function Account() {
 	const { data, status } = useSession({ required: true })

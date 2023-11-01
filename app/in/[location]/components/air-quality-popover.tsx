@@ -1,5 +1,5 @@
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
-import { AqiData } from '@/lib/types'
+import { AqiData } from '@/types/index'
 import { CornerRightDown } from 'lucide-react'
 
 type Props = { data: AqiData['data'] }

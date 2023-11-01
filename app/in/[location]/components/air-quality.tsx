@@ -1,4 +1,4 @@
-import { AQIMessage, AqiData } from '@/lib/types'
+import { AQIMessage, AqiData } from '@/types/index'
 import { getMessageByAqi } from '@/lib/utils/aqi'
 import { CornerRightDown } from 'lucide-react'
 import { Card, CardContent, CardTitle } from '@/components/ui/card'

@@ -1,4 +1,4 @@
-import { UserSettings } from '@/lib/types'
+import { UserSettings } from '@/types/index'
 import { ArrowDownFromLine, ArrowUpFromLine, CloudHail, CloudRain, CloudSnow, Wind } from 'lucide-react'
 
 type Props = {

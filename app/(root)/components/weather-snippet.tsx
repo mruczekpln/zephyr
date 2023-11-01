@@ -1,4 +1,4 @@
-import { WeatherData } from '@/lib/types'
+import { WeatherData } from '@/types/index'
 import { ArrowDownFromLine, ArrowUpFromLine, Cloud, Cloudy, Gauge } from 'lucide-react'
 import { env } from 'process'
 import { Card, CardContent, CardTitle } from '@/components/ui/card'

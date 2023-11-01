@@ -1,4 +1,4 @@
-import { UserSettings, WeatherData } from '@/lib/types'
+import { UserSettings, WeatherData } from '@/types/index'
 import { getHourlyData } from '@/lib/utils/weather-data'
 import SevenDayForecast from './7day-forecast'
 import Astronomy from './astronomy'

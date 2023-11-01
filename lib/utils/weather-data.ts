@@ -1,4 +1,4 @@
-import { DailyData, HourlyData } from '../types'
+import { DailyData, HourlyData } from '../../types/index..dts'
 
 function getHourlyData(data: DailyData[]) {
 	const allHourForecasts: HourlyData[] = []

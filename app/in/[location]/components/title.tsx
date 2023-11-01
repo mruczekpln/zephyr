@@ -3,7 +3,7 @@ import { ChevronDown } from 'lucide-react'
 import TitleDetails from './title-details'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { Card, CardContent, CardTitle } from '@/components/ui/card'
-import { UserSettings } from '@/lib/types'
+import { UserSettings } from '@/types/index'
 
 type PercentageCategory = {
 	precip: {

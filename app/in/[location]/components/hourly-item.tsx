@@ -1,5 +1,5 @@
 import { getBiggerIcon, getConditionByID } from '@/lib/conditions'
-import { HourlyData, User, UserSettings } from '@/lib/types'
+import { HourlyData, User, UserSettings } from '@/types/index'
 import { roundToNearest5 } from '@/lib/utils/weather-data'
 import { Separator } from '@/components/ui/separator'
 import { CloudRain } from 'lucide-react'

@@ -1,7 +1,7 @@
 import { TableRow, TableCell } from '@/components/ui/table'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { getConditionByID } from '@/lib/conditions'
-import { DailyData, UserSettings } from '@/lib/types'
+import { DailyData, UserSettings } from '@/types/index'
 import { roundToNearest5 } from '@/lib/utils/weather-data'
 import { ArrowUpFromLine, ArrowDownFromLine, CloudRain, Wind } from 'lucide-react'
 import HourlyForecast from './hourly-forecast'

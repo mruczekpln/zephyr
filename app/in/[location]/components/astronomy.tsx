@@ -1,6 +1,6 @@
 'use client'
 
-import { AstronomyData } from '@/lib/types'
+import { AstronomyData } from '@/types/index'
 import { getMoonPhase } from '@/lib/utils/astronomy'
 import { CornerDownLeft, CornerRightUp, MoonStar, MoveDownRight, MoveUpRight, Sun } from 'lucide-react'
 import { useEffect, useState } from 'react'

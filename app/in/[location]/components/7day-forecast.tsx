@@ -3,7 +3,7 @@ import { Card, CardContent, CardTitle } from '../../../../components/ui/card'
 import { ArrowDownFromLine, ArrowUpFromLine, CloudRain, CloudSun, Cloudy, Sun, Wind } from 'lucide-react'
 import { getConditionByID } from '@/lib/conditions'
 import { roundToNearest5 } from '@/lib/utils/weather-data'
-import { DailyData, UserSettings } from '@/lib/types'
+import { DailyData, UserSettings } from '@/types/index'
 import DailyItem from './daily-item'
 
 type Props = { dailyForecast: DailyData[]; unit: UserSettings['unit'] }

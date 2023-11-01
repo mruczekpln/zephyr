@@ -1,4 +1,4 @@
-import { AQIMessage } from '../types'
+import { AQIMessage } from '../../types/index..dts'
 
 const messages: AQIMessage[] = [
 	{

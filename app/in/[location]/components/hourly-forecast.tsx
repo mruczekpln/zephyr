@@ -3,7 +3,7 @@ import { Card, CardContent, CardTitle } from '@/components/ui/card'
 import { CloudRain, CloudSun, Cloudy, Divide, icons, Sun } from 'lucide-react'
 import Conditions, { getConditionByID, getBiggerIcon } from '@/lib/conditions'
 import { roundToNearest5 } from '@/lib/utils/weather-data'
-import { HourlyData, UserSettings } from '@/lib/types'
+import { HourlyData, UserSettings } from '@/types/index'
 import HourlyItem from './hourly-item'
 
 type Props = { unit: UserSettings['unit']; hourlyData: HourlyData[] }

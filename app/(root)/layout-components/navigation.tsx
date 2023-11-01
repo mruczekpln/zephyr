@@ -9,7 +9,7 @@ import { useSession } from 'next-auth/react'
 import { Skeleton } from '@/components/ui/skeleton'
 import NavigationDropdown from './navigation-dropdown'
 import AuthLink from './auth-link'
-import { SessionData } from '@/lib/types'
+import { SessionData } from '@/types/index'
 
 export default function Navigation() {
 	const { data, status } = useSession()

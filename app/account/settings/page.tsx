@@ -4,13 +4,11 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter }
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/ui/select'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
-import { Ruler, Satellite } from 'lucide-react'
-import { getSession, useSession } from 'next-auth/react'
-import SettingsLoading from './loading'
-import { SessionData, User, UserSettings } from '@/lib/types'
-import { useEffect, useRef, useState } from 'react'
+import { Ruler } from 'lucide-react'
+import { getSession } from 'next-auth/react'
+import { User, UserSettings } from '@/types/index'
+import { useEffect, useState } from 'react'
 import { Session } from 'next-auth'
-import { statSync } from 'fs'
 
 async function updateSetting(id: string, to: string) {
 	const res = await fetch('/api/users/update-settings', {
@@ -28,6 +26,7 @@ async function updateSetting(id: string, to: string) {
 
 	return null
 }
+
 const formStates: {
 	text: string
 	buttonDisabled: boolean

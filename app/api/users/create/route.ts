@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt'
-import { User } from '@/lib/types'
+import { User } from '@/types/index'
 import { NextResponse } from 'next/server'
 import clientPromise from '../../auth/[...nextauth]/adapters/mongodb'
 

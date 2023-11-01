@@ -1,16 +1,17 @@
 import { env } from 'process'
 
-import { User, WeatherData } from '@/lib/types'
+import { User, WeatherData } from '@/types/index'
 import { redirect } from 'next/navigation'
 import Title from './components/title'
 import DetailsGrid from './components/details-grid'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/app/api/auth/[...nextauth]/route'
+import addSearch from '@/app/api/users/add-search'
 
 async function getWeatherData(location: string, unitGroup: 'metric' | 'us') {
 	const response = await fetch(
-		`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}/next7days?unitGroup=${unitGroup}&key=${env.WEATHER_API_KEY}&include=current,hours&lang=id&contentType=json`,
-		{ next: { revalidate: 60 } }
+		`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}/next7days?unitGroup=${unitGroup}&key=${env.WEATHER_API_KEY}&include=current,hours&lang=id&contentType=json`
+		// { next: { revalidate: 60 } }
 	)
 
 	if (response.status === 400)
@@ -23,35 +24,20 @@ async function getWeatherData(location: string, unitGroup: 'metric' | 'us') {
 	return data
 }
 
-async function addLocation(id: string, location: { name: string; query: string; lat: number; lon: number }) {
-	const response = await fetch(`${process.env.NEXTAUTH_URL}/api/users/add-search`, {
-		method: 'POST',
-		body: JSON.stringify({ id, location }),
-		headers: {
-			'Content-Type': 'application/json'
-		},
-		next: {
-			revalidate: 60
-		}
-	})
-
-	const data = await response.json()
-	console.log(data)
-}
-
 type Params = { params: { location: string } }
 export default async function InLocation({ params }: Params) {
 	const session = (await getServerSession(authOptions)) as { user: User }
 	const unit = session ? (session.user.settings.unit === 'imperial' ? 'us' : 'metric') : 'metric'
 	const data = await getWeatherData(params.location, unit)
 	if (data['ok'] && !!data['ok']) redirect('/?invalid-location=true')
+
 	const weatherData: WeatherData = data
 
 	const current = weatherData.currentConditions
 	const today = weatherData.days[0]
 
 	if (session)
-		addLocation(session.user._id as string, {
+		addSearch(session.user._id as string, {
 			name: weatherData.resolvedAddress,
 			query: decodeURI(params.location),
 			lat: weatherData.latitude,

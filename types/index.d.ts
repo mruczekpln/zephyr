@@ -1,5 +1,5 @@
 import { Search } from 'lucide-react'
-import { HourlyWeather as HourData } from '@/lib/types'
+import { ObjectId } from 'mongodb'
 
 type HourlyData = {
 	datetime: string
@@ -223,16 +223,7 @@ type UserSettings = {
 	unit: 'metric' | 'imperial'
 }
 
-type User = {
-	id?: string
-	githubProfileId?: number
-	email: string
-	password: string | null
-	emailVerified: boolean
-} & SessionData
-
 type SessionData = {
-	_id: string
 	name: string
 	image: string
 	searches: UserSearches
@@ -240,6 +231,13 @@ type SessionData = {
 	settings: UserSettings
 	createdAt: string
 }
+
+type User = {
+	_id: string | ObjectId
+	password?: string | null
+	email: string
+	emailVerified: boolean
+} & SessionData
 
 type Credentials = {
 	name: string

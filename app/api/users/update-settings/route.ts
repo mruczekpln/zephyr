@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import clientPromise from '../../auth/[...nextauth]/adapters/mongodb'
-import { UserSettings } from '@/lib/types'
+import { UserSettings } from '@/types/index'
 import { ObjectId } from 'mongodb'
 
 type RequestBody = { id: string; unit: UserSettings }

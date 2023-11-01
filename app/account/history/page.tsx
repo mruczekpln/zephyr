@@ -4,7 +4,7 @@ import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 import { Session, getServerSession } from 'next-auth'
 import { getSession, useSession } from 'next-auth/react'
 import HistoryLoading from './loading'
-import { SessionData } from '@/lib/types'
+import { SessionData } from '@/types/index'
 import HistorySearch from './history-search'
 import { useEffect, useState } from 'react'
 
