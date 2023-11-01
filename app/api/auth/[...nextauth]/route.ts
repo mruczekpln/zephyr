@@ -35,10 +35,10 @@ export const authOptions: AuthOptions = {
 			// })
 
 			// const data = await res.json()
-			console.log(token)
 			const users = (await clientPromise).db('zephyr').collection('users')
 			const userData = await users.findOne({ _id: new ObjectId(token.sub) })
 			if (!userData) throw new Error("Couldn't find an user with this id.")
+			console.log(userData)
 
 			return { ...session, user: userData }
 		}
