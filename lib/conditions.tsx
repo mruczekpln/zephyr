@@ -17,7 +17,7 @@ import {
 	Sun
 } from 'lucide-react'
 import { ReactElement } from 'react'
-import { Condition } from '../types/index..dts'
+import { Condition } from '../types/index'
 
 const Conditions: Condition[] = [
 	{ id: 'type_1', desc: 'Blowing Or Drifting Snow', icon: <CloudSnow /> },

@@ -118,7 +118,7 @@ export default function Settings() {
 							onClick={async () => {
 								if (JSON.stringify(state.unit) !== JSON.stringify(user.settings.unit)) {
 									setState(prev => ({ ...prev, formState: 2 }))
-									await updateSetting(user._id, state.unit)
+									await updateSetting(user._id.toString(), state.unit)
 									setState(prev => ({ ...prev, formState: 3 }))
 								}
 							}}

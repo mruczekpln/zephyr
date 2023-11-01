@@ -1,4 +1,4 @@
-import { MoonPhaseMessage } from '../../types/index..dts'
+import { MoonPhaseMessage } from '@/types/index'
 
 const moonPhases: MoonPhaseMessage[] = [
 	{
