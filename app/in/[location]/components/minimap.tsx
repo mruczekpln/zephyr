@@ -8,13 +8,13 @@ export default async function Minimap({ lat, lon }: Props) {
 			<CardTitle className='font-title absolute text-xl z-10 rounded-tl-xl rounded-br-xl bg-background p-2 px-3 tracking-wide'>
 				MAP
 			</CardTitle>
-			<CardContent className='flex items-center h-full p-0 justify-center'>
+			<CardContent className='flex items-center h-full p-0 justify-center w-full'>
 				<Image
-					className='rounded-xl w-full h-full filter grayscale'
-					src={`https://api.mapbox.com/styles/v1/mapbox/outdoors-v12/static/${lon},${lat},8/300x600?access_token=${process.env['MAPBOX_TOKEN']}`}
+					className='rounded-xl filter grayscale'
+					src={`https://api.mapbox.com/styles/v1/mapbox/outdoors-v12/static/${lon},${lat},8/248x514?access_token=${process.env['MAPBOX_TOKEN']}`}
 					alt='minimap'
-					fill
-					quality={100}
+					width={248}
+					height={514}
 				/>
 			</CardContent>
 		</Card>

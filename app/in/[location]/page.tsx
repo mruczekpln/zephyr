@@ -10,8 +10,8 @@ import addSearch from '@/app/api/users/add-search'
 
 async function getWeatherData(location: string, unitGroup: 'metric' | 'us') {
 	const response = await fetch(
-		`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}/next7days?unitGroup=${unitGroup}&key=${env.WEATHER_API_KEY}&include=current,hours&lang=id&contentType=json`
-		// { next: { revalidate: 60 } }
+		`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}/next7days?unitGroup=${unitGroup}&key=${env.WEATHER_API_KEY}&include=current,hours&lang=id&contentType=json`,
+		{ next: { revalidate: 60 } }
 	)
 
 	if (response.status === 400)

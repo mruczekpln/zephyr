@@ -27,7 +27,7 @@ export default function LocationForm({ invalid }: Props) {
 				className={`h-full ${invalid === 'true' && 'placeholder:font-bold'}`}
 				required
 			></Input>
-			<Button type='submit' className='grow h-full aspect-square'>
+			<Button aria-label='submit' type='submit' name='submit' className='grow h-full aspect-square'>
 				<ArrowDownRightSquare></ArrowDownRightSquare>
 			</Button>
 		</form>

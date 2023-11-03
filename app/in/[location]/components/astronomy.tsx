@@ -9,7 +9,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 
 async function getAstronomyData(location: string) {
-	const response = await fetch(`/api/astronomy/${location}`)
+	const response = await fetch(`/api/weather/astronomy/${location}`, { next: { revalidate: 60 } })
 	const data = await response.json()
 
 	return data
@@ -36,6 +36,8 @@ export default function Astronomy({ location }: Props) {
 						<TooltipTrigger
 							onClick={() => setMode(mode === 'sun' ? 'moon' : 'sun')}
 							className='text-sm align-bottom cursor-pointer hover:underline'
+							name='switch-mode'
+							aria-label='switch-mode'
 						>
 							{mode === 'sun' ? <MoonStar className='inline'></MoonStar> : <Sun className='inline'></Sun>}
 							<CornerDownLeft className='inline ml-2' size={12}></CornerDownLeft>

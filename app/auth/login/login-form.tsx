@@ -48,7 +48,7 @@ export default function LogInForm() {
 			else form.setError('email', { type: 'custom', message: res?.error })
 			setLoading(false)
 		} else {
-			// router.push('/?revalidate=true')
+			router.push('/')
 		}
 	}
 	return (

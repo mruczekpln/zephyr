@@ -1,6 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-	images: { domains: ['api.mapbox.com', 'avatars.githubusercontent.com'] }
+	images: {
+		remotePatterns: [
+			{
+				hostname: 'api.mapbox.com'
+			},
+			{
+				hostname: 'avatars.githubusercontent.com'
+			}
+		]
+	}
 }
 
 const withBundleAnalyzer = require('@next/bundle-analyzer')({

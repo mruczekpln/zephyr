@@ -50,11 +50,11 @@ export default function Navigation() {
 		>
 			<Link
 				href={'/'}
-				className='text-xl flex gap-2 items-center hover:bg-primary/20 px-4 rounded-xl transition-colors duration-200'
+				className='h-max flex items-center gap-3 text-xl group px-4 rounded-xl transition-colors duration-200'
 				prefetch={false}
 			>
 				<Bird color='black' size={32} />
-				<p className=''>zephyr </p>
+				<p className='group-hover:underline'>zephyr</p>
 			</Link>
 			<div className='grow-[2] flex justify-end'>
 				<div className=' flex gap-4 items-center'>{content}</div>

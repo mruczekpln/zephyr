@@ -9,7 +9,7 @@ import WeatherSnippet from './components/weather-snippet'
 export default function Home({ searchParams }: { searchParams?: { 'invalid-location': string | undefined } }) {
 	return (
 		<div className='max-h-screen flex flex-col h-screen overflow-y-hidden'>
-			<div className='h-[calc(100vh-80px)] grid grid-cols-10 grid-rows-[repeat(10,minmax(0px,1fr))] gap-3 bg-gradient-to-t from-background to-foreground  [&>*]:backdrop-blur-md p-3 pb-0'>
+			<div className='h-full grid grid-cols-10 grid-rows-[repeat(10,minmax(0,1fr))] gap-3 bg-gradient-to-t from-background to-foreground  [&>*]:backdrop-blur-md p-3 pb-0'>
 				<Card className='row-span-4 col-span-full flex items-end p-16'>
 					<div className='bottom-8 flex gap-8 items-end w-full h-16'>
 						<h1 className='text-7xl font-extrabold grow whitespace-nowrap leading-[0.8]'>What&apos;s the weather in</h1>
@@ -25,8 +25,8 @@ export default function Home({ searchParams }: { searchParams?: { 'invalid-locat
 				<Card className='row-span-6 col-span-3 col-start-8'>
 					<CardContent className='flex flex-col h-full'>
 						<CardTitle className='font-title text-3xl pt-4'>WHAT&apos;S ZEPHYR ACTUALLY?</CardTitle>
-						<h2 className='font-bold text-4xl mt-4 mb-2'>Unlocking the Beauty of Weather.</h2>
-						<p className='text-sm'>
+						<h2 className='font-bold text-2xl my-2'>Unlocking the Beauty of Weather.</h2>
+						<p className=''>
 							<u>Zephyr</u> is redefining what you can expect from a weather app. It&apos;s not just about forecasts;
 							it&apos;s about storytelling. Zephyr transforms weather data into immersive narratives. Explore the
 							symphony of the seasons, follow the drama of weather systems, and dive into the artistry of the

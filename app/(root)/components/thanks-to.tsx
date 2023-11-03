@@ -6,7 +6,7 @@ import Vclogo from '@/public/vclogo.svg'
 
 export default function ThankTo() {
 	return (
-		<div className='flex justify-between items-center h-full w-full px-16'>
+		<div className='flex justify-between items-center h-24 w-full px-16'>
 			<div className='flex h-full items-center gap-16 [&>*]:text-xl'>
 				<p>
 					Thanks to: <MousePointerClick className='inline'></MousePointerClick>
