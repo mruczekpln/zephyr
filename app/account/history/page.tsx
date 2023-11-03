@@ -13,12 +13,11 @@ export default function History() {
 	const user = sessionData && (sessionData.user as SessionData)
 
 	useEffect(() => {
-		const session = getSession().then(res => setSessionData(res!))
+		getSession().then(res => setSessionData(res!))
 	}, [])
 
 	return (
 		<div className='flex flex-col items-center gap-8'>
-			{/* {status === 'loading' && <HistoryLoading></HistoryLoading>} */}
 			{user && (
 				<>
 					<h1 className='font-title text-5xl leading-relaxed'>

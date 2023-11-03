@@ -18,5 +18,10 @@ export default function AuthLink(props: Props) {
 				{props.children}
 			</div>
 		)
-	else return <Link href={props.href as string}>{props.children}</Link>
+	else
+		return (
+			<Link prefetch={false} href={props.href as string}>
+				{props.children}
+			</Link>
+		)
 }

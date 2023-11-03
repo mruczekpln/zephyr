@@ -1,6 +1,6 @@
 import { Card, CardContent, CardTitle } from '@/components/ui/card'
 
-import gradient from '@/public/gradient.jpeg'
+import gradient from '@/public/gradient.webp'
 import ScrollingText from './components/scrolling-text'
 import ThanksTo from './components/thanks-to'
 import LocationForm from './components/location-form'

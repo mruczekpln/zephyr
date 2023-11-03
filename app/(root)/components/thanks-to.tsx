@@ -11,7 +11,7 @@ export default function ThankTo() {
 				<p>
 					Thanks to: <MousePointerClick className='inline'></MousePointerClick>
 				</p>
-				<Link href='https://aqicn.org/contact/'>
+				<Link href='https://aqicn.org/contact/' prefetch={false}>
 					<Image
 						className='grayscale duration-200 hover:grayscale-0 object-cover'
 						src={Aqicn}
@@ -20,7 +20,7 @@ export default function ThankTo() {
 						height={50}
 					></Image>
 				</Link>
-				<Link href='https://www.visualcrossing.com/'>
+				<Link href='https://www.visualcrossing.com/' prefetch={false}>
 					<Image
 						className='grayscale duration-200 hover:grayscale-0 object-cover'
 						src={Vclogo}
@@ -32,7 +32,7 @@ export default function ThankTo() {
 			</div>
 			<div>
 				<p className='inline pr-4'>made by:</p>
-				<Link href='https://yummycoffee.github.io' target='_blank' className='underline text-xl'>
+				<Link href='https://yummycoffee.github.io' target='_blank' className='underline text-xl' prefetch={false}>
 					yummycoffee
 				</Link>
 			</div>

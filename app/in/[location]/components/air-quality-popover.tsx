@@ -15,19 +15,19 @@ export default function AirQualityPopover({ data }: Props) {
 					CO <i>Carbon Monoxide</i> (μg/m3) - <b>{String(data.iaqi['co'].v)}</b>
 				</p>
 				<p>
-					O3 <i>Ozone</i> (μg/m3) - <b>{String(data.iaqi['o3'].v)}</b>
+					O3 <i>Ozone</i> (μg/m3) - <b>{String(data.iaqi['o3'] ? data.iaqi['o3'].v : 'unknown')}</b>
 				</p>
 				<p>
-					NO2 <i>Nitrogen dioxide</i> (μg/m3) - <b>{String(data.iaqi['no2'].v)}</b>
+					NO2 <i>Nitrogen dioxide</i> (μg/m3) - <b>{String(data.iaqi['no2'] ? data.iaqi['no2'].v : 'unknown')}</b>
 				</p>
 				<p>
-					SO2 <i>Sulphur dioxide</i> (μg/m3) - <b>{String(data.iaqi['so2'].v)}</b>
+					SO2 <i>Sulphur dioxide</i> (μg/m3) - <b>{String(data.iaqi['so2'] ? data.iaqi['so2'].v : 'unknown')}</b>
 				</p>
 				<p>
-					PM2.5 (μg/m3) - <b>{String(data.iaqi['pm25'].v)}</b>
+					PM2.5 (μg/m3) - <b>{String(data.iaqi['pm25'] ? data.iaqi['pm25'].v : 'unknown')}</b>
 				</p>
 				<p>
-					PM10 (μg/m3) - <b>{String(data.iaqi['pm10'].v)}</b>
+					PM10 (μg/m3) - <b>{String(data.iaqi['pm10'] ? data.iaqi['pm10'].v : 'unknown')}</b>
 				</p>
 			</PopoverContent>
 		</Popover>

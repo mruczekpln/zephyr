@@ -1,4 +1,4 @@
-import gradient from '@/public/gradient.jpeg'
+import gradient from '@/public/gradient.webp'
 import { ClientSafeProvider, getProviders } from 'next-auth/react'
 import { getServerSession } from 'next-auth'
 import { redirect } from 'next/navigation'
