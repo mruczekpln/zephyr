@@ -30,7 +30,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 				<title>Zephyr</title>
 			</Head>
 			<AuthSessionProvider>
-				<body className={`font-main max-w-[100vw] w-screen min-h-screen h-auto`}>
+				<body className={`font-main max-w-[100vw] w-screen min-h-screen h-auto overflow-hidden`}>
 					<Navigation></Navigation>
 					{children}
 				</body>

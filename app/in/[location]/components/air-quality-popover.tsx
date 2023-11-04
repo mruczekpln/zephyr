@@ -12,7 +12,7 @@ export default function AirQualityPopover({ data }: Props) {
 			</PopoverTrigger>
 			<PopoverContent className='w-auto'>
 				<p>
-					CO <i>Carbon Monoxide</i> (μg/m3) - <b>{String(data.iaqi['co'].v)}</b>
+					CO <i>Carbon Monoxide</i> (μg/m3) - <b>{String(data.iaqi['co'] ? data.iaqi['co'].v : 'unknown')}</b>
 				</p>
 				<p>
 					O3 <i>Ozone</i> (μg/m3) - <b>{String(data.iaqi['o3'] ? data.iaqi['o3'].v : 'unknown')}</b>

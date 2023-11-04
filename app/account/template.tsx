@@ -1,6 +1,8 @@
 'use client'
 
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import Image from 'next/image'
+import AccountPageBg from '@/public/account-page-bg.svg'
 import { usePathname, useRouter } from 'next/navigation'
 import { ReactNode } from 'react'
 
@@ -10,9 +12,18 @@ export default function AccountLayout({ children }: { children: ReactNode }) {
 	const childRoute = pathname.split('/').pop()
 
 	return (
-		<div className='w-full min-h-screen flex flex-col items-center pt-20 gap-16 bg-gradient-to-b from-foreground/50 to-white'>
-			<Tabs defaultValue={childRoute} className='z-50'>
-				<TabsList className='grid grid-cols-3 z-50'>
+		<div
+			className='min-h-screen flex flex-col items-center pt-[68px] gap-16 w-screen'
+			style={{
+				backgroundImage: `url(${AccountPageBg.src})`,
+				backgroundAttachment: 'fixed',
+				backgroundSize: '100vw auto',
+				backgroundRepeat: 'no-repeat',
+				backgroundBlendMode: 'lighten'
+			}}
+		>
+			<Tabs defaultValue={childRoute} className='z-50 '>
+				<TabsList className='grid grid-cols-3 z-50 bg-foreground [&>*]:text-white'>
 					<TabsTrigger value='info' onClick={() => router.push('/account/info')}>
 						Your Account
 					</TabsTrigger>
@@ -24,7 +35,6 @@ export default function AccountLayout({ children }: { children: ReactNode }) {
 					</TabsTrigger>
 				</TabsList>
 			</Tabs>
-
 			{children}
 		</div>
 	)

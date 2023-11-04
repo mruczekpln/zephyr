@@ -8,6 +8,7 @@ import { Ruler } from 'lucide-react'
 import { getSession } from 'next-auth/react'
 import { User, UserSettings } from '@/types/index'
 import { useEffect, useState } from 'react'
+import SettingsLoading from './loading'
 import { Session } from 'next-auth'
 
 async function updateSetting(id: string, to: string) {
@@ -78,7 +79,7 @@ export default function Settings() {
 	return (
 		<div className='flex flex-col w-1/2  h-full gap-8'>
 			<h1 className='text-6xl font-title w-max'>Settings</h1>
-			{user && (
+			{user && user.settings ? (
 				<Card>
 					<CardHeader>
 						<CardTitle>Preferences</CardTitle>
@@ -94,10 +95,12 @@ export default function Settings() {
 							<Select
 								onValueChange={(data: UserSettings['unit']) => setState(prev => ({ formState: 1, unit: data }))}
 								defaultValue={user.settings.unit}
+								name='unit'
 							>
 								<SelectTrigger
 									className='w-48 ml-auto'
 									disabled={formStates[state.formState].selectDisabled}
+									name='unit'
 									//  'Successfully saved your preferences!'
 								>
 									<SelectValue
@@ -129,6 +132,8 @@ export default function Settings() {
 						</Button>
 					</CardFooter>
 				</Card>
+			) : (
+				<SettingsLoading></SettingsLoading>
 			)}
 		</div>
 	)
