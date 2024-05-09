@@ -1,25 +1,22 @@
-import { NextResponse } from 'next/server'
-import clientPromise from '../../auth/[...nextauth]/adapters/mongodb'
-import { UserSettings } from '@/types/index'
-import { ObjectId } from 'mongodb'
+import { NextResponse } from "next/server";
+import { UserSettings } from "@/types/index";
+import { ObjectId } from "mongodb";
+import UsersCollection from "../users-collection";
 
-type RequestBody = { id: string; unit: UserSettings }
+type RequestBody = { id: string } & UserSettings;
 export async function POST(req: Request) {
-	const body: RequestBody = await req.json()
-	console.log(body)
+  const { id, unit }: RequestBody = await req.json();
 
-	const users = (await clientPromise).db('zephyr').collection('users')
+  const users = await UsersCollection();
+  const result = await users.updateOne(
+    { _id: new ObjectId(id) },
+    {
+      $set: {
+        settings: { unit },
+      },
+    }
+  );
+  console.log(result);
 
-	const update = {
-		$set: {
-			settings: {
-				unit: body.unit
-			}
-		}
-	}
-
-	const result = await users.updateOne({ _id: new ObjectId(body.id) }, update)
-	console.log(result)
-
-	return NextResponse.json({ updated: true })
+  return NextResponse.json({ updated: true });
 }
