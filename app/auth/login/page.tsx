@@ -2,9 +2,9 @@ import Link from "next/link";
 import gradient from "@/public/gradient.webp";
 import { getServerSession } from "next-auth/next";
 import { redirect } from "next/navigation";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import LogInForm from "./login-form";
 import AuthWithGithub from "../auth-with-github";
+import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 
 export default async function LogIn() {
   const session = await getServerSession(authOptions);

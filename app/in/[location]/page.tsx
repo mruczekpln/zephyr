@@ -5,9 +5,9 @@ import { redirect } from "next/navigation";
 import Title from "./components/title";
 import DetailsGrid from "./components/details-grid";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import addSearch from "@/app/api/users/add-search";
 import { getChartUrl } from "@/lib/utils/chart";
+import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 
 async function getWeatherData(location: string, unitGroup: "metric" | "us") {
   const response = await fetch(
@@ -55,11 +55,16 @@ export default async function InLocation({ params }: Params) {
       return Math.round(hour.temp);
     });
 
+  console.log(tempsEvery2Hours);
+
   return (
     <div
       className="min-h-screen bg-opacity-30 bg-no-repeat"
       style={{
-        backgroundImage: `url(${getChartUrl(tempsEvery2Hours)})`,
+        backgroundImage: `url(${getChartUrl(
+          tempsEvery2Hours,
+          session.user.settings.unit
+        )})`,
         backgroundSize: "contain",
         backgroundPosition: "right 0px top -80px",
       }}

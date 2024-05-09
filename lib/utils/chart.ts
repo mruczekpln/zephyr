@@ -1,4 +1,9 @@
-export function getChartUrl(tempsDataset: number[]) {
+import { UserSettings } from "@/types";
+
+export function getChartUrl(
+  tempsDataset: number[],
+  unit: UserSettings["unit"]
+) {
   const CHART_TEMPLATE = `{ 
     type: "sparkline",
     data: {
@@ -22,7 +27,7 @@ export function getChartUrl(tempsDataset: number[]) {
           color: "rgba(0, 0, 0, 0.3)",
 
           formatter: (value) => {
-            return value + " °C";
+            return value + " °${unit === "metric" ? "C" : "F"}";
           },
           font: {
             size: 24,
@@ -34,8 +39,8 @@ export function getChartUrl(tempsDataset: number[]) {
           {
             display: false,
             ticks: {
-              min: 0,
-              max: 30,
+              min: ${unit === "metric" ? "-5" : "-15"},
+              max: ${unit === "metric" ? "30" : "100"},
             },
           },
         ],
