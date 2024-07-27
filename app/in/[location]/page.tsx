@@ -12,7 +12,7 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 async function getWeatherData(location: string, unitGroup: "metric" | "us") {
   const response = await fetch(
     `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}/next7days?unitGroup=${unitGroup}&key=${env.WEATHER_API_KEY}&include=current,hours&lang=id&contentType=json`,
-    { next: { revalidate: 60 } }
+    { next: { revalidate: 60 } },
   );
 
   if (response.status === 400)
@@ -63,7 +63,7 @@ export default async function InLocation({ params }: Params) {
       style={{
         backgroundImage: `url(${getChartUrl(
           tempsEvery2Hours,
-          session.user.settings.unit
+          session ? session.user.settings.unit : "metric",
         )})`,
         backgroundSize: "contain",
         backgroundPosition: "right 0px top -80px",
